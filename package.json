@@ -1,0 +1,29 @@
+{
+  "name": "hazec",
+  "version": "0.0.1",
+  "description": "半角全角変換ライブラリ",
+  "main": "src/hazec.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niwaringo/hazec.git"
+  },
+  "keywords": [
+    "半角",
+    "全角",
+    "kataカタカナ",
+    "半角カナ",
+    "変換"
+  ],
+  "author": "@niwaringo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/niwaringo/hazec/issues"
+  },
+  "homepage": "https://github.com/niwaringo/hazec",
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}
