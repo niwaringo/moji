@@ -10,7 +10,7 @@ function Mojic(str) {
 
 /**
  * @param {string} type
- * @return {string}
+ * @return {this}
  */
 Mojic.prototype.convert = function convert(type) {
   var pattern = this._pattern.ftoh;
@@ -29,6 +29,14 @@ Mojic.prototype.convert = function convert(type) {
 
   return this;
 };
+
+/**
+ * @return {string}
+ */
+Mojic.prototype.toString = function toString() {
+  return this.str;
+};
+
 
 Mojic.prototype._pattern = {
   ftoh: {start:0xff01, end:0xff5e, mod:-0xfee0}
