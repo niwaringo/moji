@@ -1,8 +1,9 @@
 var assert = require('assert');
-var Hazec = require('../src/hazec.js');
-describe('Hazec', function(){
-  it('hello', function(){
-    var hazec = new Hazec();
-    assert.strictEqual(hazec.hello(), 'hello');
+var mojic = require('../src/hazec.js');
+describe('mojic', function(){
+  it('ftoh', function(){
+    assert.strictEqual(
+      mojic('１２３４５６７８９10').convert('ftoh'),
+      '12345678910');
   });
 });
