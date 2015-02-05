@@ -1,9 +1,9 @@
 var assert = require('assert');
-var mojic = require('../src/hazec.js');
+var mojic = require('../src/mojic.js');
 describe('mojic', function(){
-  it('ftoh', function(){
+  it('ztoh', function(){
     assert.strictEqual(
-      mojic('１２３４５６７８９10').convert('ftoh').toString(),
+      mojic('１２３４５６７８９10').ztoh().toString(),
       '12345678910');
   });
 });

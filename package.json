@@ -1,5 +1,5 @@
 {
-  "name": "hazec",
+  "name": "mojic",
   "version": "0.0.1",
   "description": "半角全角変換ライブラリ",
   "main": "src/hazec.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/niwaringo/hazec.git"
+    "url": "https://github.com/niwaringo/mojic"
   },
   "keywords": [
     "半角",
@@ -20,9 +20,9 @@
   "author": "@niwaringo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/niwaringo/hazec/issues"
+    "url": "https://github.com/niwaringo/mojic/issues"
   },
-  "homepage": "https://github.com/niwaringo/hazec",
+  "homepage": "https://github.com/niwaringo/mojic",
   "devDependencies": {
     "mocha": "^2.1.0"
   }
