@@ -1,61 +1,18 @@
-'use strict';
+var Moji = require('./moji.core.js');
 
-/**
- * @constructor
- * @param {string} str
- */
-function Moji(str) {
-  this.str = str;
-}
+Moji.mojisyu('ZE', {start:0xff01, end:0xff5e}); // 全角英数
+Moji.mojisyu('HE', {start:0x0021, end:0x007e}); // 半角英数
+Moji.mojisyu('HG', {start:0x3041, end:0x3096}); // ひらがな
+Moji.mojisyu('KK', {start:0x30a1, end:0x30f6}); // カタカナ
 
-/**
- * @param {string} type
- * @return {this}
- */
-Moji.prototype._convert = function convert(from, to) {
-  var start = this._pattern[from].start;
-  var end = this._pattern[from].end;
-  var distance = this._distance[from + 'to' + to];
+// 半角カナ
+Moji.mojisyu('HK', {
+  regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g,
+  list: ["｡", "｢", "｣", "､", "･", "ｦ", "ｧ", "ｨ", "ｩ", "ｪ", "ｫ", "ｬ", "ｭ", "ｮ", "ｯ", "ｰ", "ｱ", "ｲ", "ｳ", "ｴ", "ｵ", "ｶ", "ｷ", "ｸ", "ｹ", "ｺ", "ｻ", "ｼ", "ｽ", "ｾ", "ｿ", "ﾀ", "ﾁ", "ﾂ", "ﾃ", "ﾄ", "ﾅ", "ﾆ", "ﾇ", "ﾈ", "ﾉ", "ﾊ", "ﾋ", "ﾌ", "ﾍ", "ﾎ", "ﾏ", "ﾐ", "ﾑ", "ﾒ", "ﾓ", "ﾔ", "ﾕ", "ﾖ", "ﾗ", "ﾘ", "ﾙ", "ﾚ", "ﾛ", "ﾜ", "ﾝ", "ﾞ", "ﾟ", "ｦﾞ", "ｳﾞ", "ｶﾞ", "ｷﾞ", "ｸﾞ", "ｹﾞ", "ｺﾞ", "ｻﾞ", "ｼﾞ", "ｽﾞ", "ｾﾞ", "ｿﾞ", "ﾀﾞ", "ﾁﾞ", "ﾂﾞ", "ﾃﾞ", "ﾄﾞ", "ﾊﾞ", "ﾊﾟ", "ﾋﾞ", "ﾋﾟ", "ﾌﾞ", "ﾌﾟ", "ﾍﾞ", "ﾍﾟ", "ﾎﾞ", "ﾎﾟ", "ﾜﾞ"]});
 
-  this.str = this.str.split('').map(function(moji) {
-    var code = moji.charCodeAt(0);
-    if (code >= start && code <= end) {
-      return String.fromCharCode(code + distance);
-    }
-    return moji;
-  }).join('');
+// 全角カナ (半角カナ変換用)
+Moji.mojisyu('ZK', {
+  regexp: /([\u3001-\u30fc])/g,
+  list: ["。", "「", "」", "、", "・", "ヲ", "ァ", "ィ", "ゥ", "ェ", "ォ", "ャ", "ュ", "ョ", "ッ", "ー", "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ヤ", "ユ", "ヨ", "ラ", "リ", "ル", "レ", "ロ", "ワ", "ン", "゛", "゜", "ヺ", "ヴ", "ガ", "ギ", "グ", "ゲ", "ゴ", "ザ", "ジ", "ズ", "ゼ", "ゾ", "ダ", "ヂ", "ヅ", "デ", "ド", "バ", "パ", "ビ", "ピ", "ブ", "プ", "ベ", "ペ", "ボ", "ポ", "ヷ"]});
 
-  return this;
-};
-
-/**
- * 全角英数から半角英数に変換
- * [z]enkaku [e]isuu [to] [h]annkaku [e]isuu
- */
-
-
-//get filter remove
-/**
- * @return {string}
- */
-Moji.prototype.toString = function toString() {
-  return this.str;
-};
-
-Moji.prototype._distance = {
-  zetohe: -0xfee0,
-  hetoze: +0xfee0,
-  hgtokk: +0x0060,
-  kktohg: -0x0060,
-};
-
-Moji.prototype._pattern = {
-  ze: {start:0xff01, end:0xff5e}, // 全角英数
-  he: {start:0x0021, end:0x007e}, // 半角英数
-  hg: {start:0x3041, end:0x3096}, // ひらがな
-  kk: {start:0x30a1, end:0x30f6}, // カタカナ
-};
-
-module.exports = function(str) {
-  return new Moji(str);
-};
+module.exports = Moji;

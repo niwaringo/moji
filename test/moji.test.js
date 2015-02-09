@@ -1,27 +1,43 @@
 var assert = require('assert');
-var moji = require('../src/moji.js');
+var Moji = require('../src/moji.js');
 describe('moji', function(){
   it('zetohe', function(){
     assert.strictEqual(
-      moji('ＡＢＣＤ０１２３４').convert('ze', 'he').toString(),
+      new Moji('ＡＢＣＤ０１２３４').convert('ZE', 'HE').toString(),
       'ABCD01234');
   });
 
   it('hetoze', function(){
     assert.strictEqual(
-      moji('ABCD01234').convert('he', 'ze').toString(),
+      new Moji('ABCD01234').convert('HE', 'ZE').toString(),
       'ＡＢＣＤ０１２３４');
   });
 
   it('hgtokk', function(){
     assert.strictEqual(
-      moji('あいうえお').convert('hg', 'kk').toString(),
+      new Moji('あいうえお').convert('HG', 'KK').toString(),
       'アイウエオ');
   });
 
   it('kktohg', function() {
     assert.strictEqual(
-      moji('アイウエオ').convert('kk', 'hg').toString(),
+      new Moji('アイウエオ').convert('KK', 'HG').toString(),
       'あいうえお');
+  });
+
+  it('zktohk', function() {
+    var zk = Moji.mojisyu('ZK').list.join('');
+    var hk = Moji.mojisyu('HK').list.join('');
+    assert.strictEqual(
+      new Moji(zk).convert('ZK', 'HK').toString(),
+      hk);
+  });
+
+  it('hktozk', function() {
+    var hk = Moji.mojisyu('HK').list.join('');
+    var zk = Moji.mojisyu('ZK').list.join('');
+    assert.strictEqual(
+      new Moji(hk).convert('HK', 'ZK').toString(),
+      zk);
   });
 });
