@@ -1,31 +1,31 @@
 var assert = require('assert');
 var Moji = require('../src/moji.js');
 describe('moji', function(){
-  it('zetohe', function(){
+  it('全角英数から半角英数', function(){
     assert.strictEqual(
       new Moji('ＡＢＣＤ０１２３４').convert('ZE', 'HE').toString(),
       'ABCD01234');
   });
 
-  it('hetoze', function(){
+  it('半角英数から全角英数', function(){
     assert.strictEqual(
       new Moji('ABCD01234').convert('HE', 'ZE').toString(),
       'ＡＢＣＤ０１２３４');
   });
 
-  it('hgtokk', function(){
+  it('ひらがなからカタカナ', function(){
     assert.strictEqual(
       new Moji('あいうえお').convert('HG', 'KK').toString(),
       'アイウエオ');
   });
 
-  it('kktohg', function() {
+  it('カタカナからひらがな', function() {
     assert.strictEqual(
       new Moji('アイウエオ').convert('KK', 'HG').toString(),
       'あいうえお');
   });
 
-  it('zktohk', function() {
+  it('全角カナから半角カナ', function() {
     var zk = Moji.mojisyu('ZK').list.join('');
     var hk = Moji.mojisyu('HK').list.join('');
     assert.strictEqual(
@@ -33,7 +33,7 @@ describe('moji', function(){
       hk);
   });
 
-  it('hktozk', function() {
+  it('半角カナから全角カナ', function() {
     var hk = Moji.mojisyu('HK').list.join('');
     var zk = Moji.mojisyu('ZK').list.join('');
     assert.strictEqual(
