@@ -65,6 +65,15 @@ Moji.mojisyu = function mojisyu(name, definition) {
  * @param {string} to_name 変化後の文字種の名前を指定
  */
 Moji.prototype.convert = function convert(from_name, to_name) {
+  // 複数一括指定の場合
+  if (Object.prototype.toString.call(arguments[0]) === '[object Array]') {
+    Array.prototype.slice.call(arguments).forEach(function(arg) {
+      this.convert(arg[0], arg[1]);
+    }, this);
+
+    return this;
+  }
+
   var from = this.MOJISYU[from_name];
   var to = this.MOJISYU[to_name];
 

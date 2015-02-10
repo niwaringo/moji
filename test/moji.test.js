@@ -40,4 +40,10 @@ describe('moji', function(){
       new Moji(hk).convert('HK', 'ZK').toString(),
       zk);
   });
+
+  it('複数の文字種を一括置換', function() {
+    assert.strictEqual(
+      new Moji('ｱｲｳｴｵ').convert(['HK', 'ZK'], ['KK', 'HG']).toString(),
+      'あいうえお');
+  });
 });
