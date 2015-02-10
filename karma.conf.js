@@ -2,6 +2,8 @@
 // Generated on Tue Feb 10 2015 16:51:11 GMT+0900 (JST)
 
 module.exports = function(config) {
+  var customLaunchers = require('./saucebrowsers.js');
+
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -31,13 +33,6 @@ module.exports = function(config) {
       'test/*.test.js': ['browserify']
     },
 
-
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
-
-
     // web server port
     port: 9876,
 
@@ -57,15 +52,18 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
 
     browserify: {
       debug: true
     },
 
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    sauceLabs: {
+      username: 'niwaringo_moji',
+      accessKey: '40aad1da-1c89-41df-843e-1d6a48129382'
+    },
+    customLaunchers: customLaunchers,
+    browsers: [process.env.sauce_browser_name],
+    reporters: ['dots', 'saucelabs'],
+    singleRun: true
   });
 };
