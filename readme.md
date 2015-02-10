@@ -58,9 +58,17 @@ new Moji('アイウエオ').convert('KK', 'HG').toString();
 new Moji('アイウエオ').convert('ZK', 'HK').toString();
 // -> ｱｲｳｴｵ
 
-/** 半角カナ -> 全角カナ **/
+/** 半角カナ → 全角カナ **/
 new Moji('ｱｲｳｴｵ').convert('HK', 'ZK').toString(),
 // -> アイウエオ
+```
+
+配列指定で一括変換が可能です。
+
+```javascript
+/** [半角カナ] → [全角カナ] → [ひらがな] **/
+new Moji('ｱｲｳｴｵ').convert(['HK', 'ZK'], ['KK', 'HG']).toString();
+// -> あいうえお
 ```
 
 ### toString()
