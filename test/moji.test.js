@@ -46,4 +46,10 @@ describe('moji', function(){
       new Moji('ｱｲｳｴｵ').convert(['HK', 'ZK'], ['KK', 'HG']).toString(),
       'あいうえお');
   });
+
+  it('trim', function() {
+    assert.strictEqual(
+      new Moji('　あ　あ　あ　').trim().convert('HG', 'KK').toString(),
+      'ア　ア　ア');
+  });
 });

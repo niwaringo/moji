@@ -13,6 +13,7 @@ function Moji(str) {
 }
 
 /**
+ * mojisyu
  * 文字種の設定
  *
  * 例)
@@ -58,6 +59,7 @@ Moji.mojisyu = function mojisyu(name, definition) {
 };
 
 /**
+ * convert
  * 変換の実行
  * 文字種によって変換方法を変える
  *
@@ -106,6 +108,15 @@ Moji.prototype._regexpConvert = function _regexpConvert(from, to) {
     }
     return to.list[index];
   });
+};
+
+/**
+ * trim
+ * 行頭、行末の空白を削除
+ */
+Moji.prototype.trim = function trim() {
+  this.result = this.result.trim();
+  return this;
 };
 
 //get filter remove
