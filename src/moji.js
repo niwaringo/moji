@@ -5,7 +5,7 @@ Moji.mojisyu('HE', {start:0x0021, end:0x007e}); // 半角英数
 Moji.mojisyu('HG', {start:0x3041, end:0x3096}); // ひらがな
 Moji.mojisyu('KK', {start:0x30a1, end:0x30f6}); // カタカナ
 
-// スペー 
+// スペース
 Moji.mojisyu('HS', {
   regexp: /(\s|\u00A0)/g,
   list:['\u0020', '\u00A0']
