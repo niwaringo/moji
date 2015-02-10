@@ -1,14 +1,14 @@
 {
-  "name": "mojic",
-  "version": "0.0.1",
-  "description": "半角全角変換ライブラリ",
-  "main": "src/hazec.js",
+  "name": "moji",
+  "version": "0.1.1",
+  "description": "半角全角変換など日本語を便利に扱うライブラリ",
+  "main": "src/moji.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/niwaringo/mojic"
+    "url": "https://github.com/niwaringo/moji"
   },
   "keywords": [
     "半角",
@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/niwaringo/mojic/issues"
   },
-  "homepage": "https://github.com/niwaringo/mojic",
+  "homepage": "https://github.com/niwaringo/moji",
   "devDependencies": {
     "mocha": "^2.1.0"
   }
