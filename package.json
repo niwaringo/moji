@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/niwaringo/moji",
   "devDependencies": {
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-mocha": "^0.1.10",
     "mocha": "^2.1.0"
   }
 }
