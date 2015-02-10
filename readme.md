@@ -19,10 +19,13 @@ var Moji = require('moji');
 
 変換などに使う文字種です。 標準では以下の文字種が登録されています。
 
-`ZE`: 全角英数  
-`HE`: 半角英数  
+`ZE`: 全角英数 // スペース含まず  
+`HE`: 半角英数 // スペース含まず  
 `HG`: ひらがな  
 `KK`: カタカナ
+
+`ZS`: 全角スペース  
+`HS`: 半角スペース
 
 `HK`: 半角カタカナ  
 `ZK`: 全角カタカナ(半角カタカナとの変換用)  
@@ -45,6 +48,10 @@ new Moji('ＡＢＣＤ０１２３４').convert('ZE', 'HE').toString();
 /** 半角英数 → 全角英数 **/
 new Moji('ABCD01234').convert('HE', 'ZE').toString();
 // -> ＡＢＣＤ０１２３４
+
+/** 全角スペース → 全角スペース **/
+new Moji('　').convert('ZS', 'HS').toString();
+// -> ' '
 
 /** ひらがな → カタカナ **/
 new Moji('あいうえお').convert('HG', 'KK').toString();
@@ -70,6 +77,10 @@ new Moji('ｱｲｳｴｵ').convert('HK', 'ZK').toString(),
 new Moji('ｱｲｳｴｵ').convert(['HK', 'ZK'], ['KK', 'HG']).toString();
 // -> あいうえお
 ```
+
+### trim()
+
+trim
 
 ### toString()
 

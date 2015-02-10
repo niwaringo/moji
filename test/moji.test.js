@@ -7,6 +7,18 @@ describe('moji', function(){
       'ABCD01234');
   });
 
+  it('全角スペースを半角スペースに', function() {
+    assert.strictEqual(
+      new Moji('　').convert('ZS', 'HS').toString(),
+      ' ');
+  });
+
+  it('半角スペースを全角スペースに', function() {
+    assert.strictEqual(
+      new Moji(' ').convert('HS', 'ZS').toString(),
+      '　');
+  });
+
   it('半角英数から全角英数', function(){
     assert.strictEqual(
       new Moji('ABCD01234').convert('HE', 'ZE').toString(),
