@@ -106,8 +106,14 @@ Moji.prototype._rangeConvert = function _rangeConvert(from, to) {
   }).join('');
 };
 
+Moji.prototype._regexpMap = function _regexpMap(regexp, callback) {
+  return this.result.replace(regexp, function(moji) {
+    return callback.call(this, moji);
+  });
+};
+
 Moji.prototype._regexpConvert = function _regexpConvert(from, to) {
-  return this.result.replace(from.regexp, function(moji) {
+  return this._regexpMap(from.regexp, function(moji) {
     var index = from.list.indexOf(moji);
     if (index < 0) {
       return moji;
