@@ -61,10 +61,10 @@ Moji.mojisyu = function mojisyu(name, definition) {
 /**
  * convert
  * 変換の実行
- * 文字種によって変換方法を変える
  *
  * @param {string} from_name 変換前の文字種の名前を指定
  * @param {string} to_name 変化後の文字種の名前を指定
+ * @returns {this}
  */
 Moji.prototype.convert = function convert(from_name, to_name) {
   // 複数一括指定の場合
@@ -89,22 +89,39 @@ Moji.prototype.convert = function convert(from_name, to_name) {
   return this;
 };
 
-Moji.prototype._rangeMap = function _rangeEach(callback) {
+/**
+ *  filter
+ *  文字種のみに絞込
+ *  @param {string} mojisyu 絞り込まれる文字種
+ *  @returns {string}
+ */
+Moji.prototype.filter = function filter(mojisyu) {
+  return this._rangeFilter(mojisyu);
+};
+
+
+Moji.prototype._rangeMap = function _rangeEach(from, to, callback) {
   return this.result.split('').map(function(moji) {
-    return callback.call(this, moji);
+    var code = moji.charCodeAt(0);
+    var is_range = (code >= from.start && code <= from.end);
+    return callback.call(this, moji, code, is_range);
   });
 };
 
 Moji.prototype._rangeConvert = function _rangeConvert(from, to) {
   var distance = to.start - from.start;
-  return this._rangeMap(function(moji) {
-    var code = moji.charCodeAt(0);
-    if (code >= from.start && code <= from.end) {
+  return this._rangeMap(from, to, function(moji, code, is_range) {
+    if (is_range) {
       return String.fromCharCode(code + distance);
     }
     return moji;
   }).join('');
 };
+
+// Moji.prototype._rangeFilter = function _rangeFilter(mojisyu) {
+//   return this._rangeMap(function(moji) {
+//   });
+// }
 
 Moji.prototype._regexpMap = function _regexpMap(regexp, callback) {
   return this.result.replace(regexp, function(moji) {
