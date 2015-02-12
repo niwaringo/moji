@@ -169,12 +169,17 @@ Moji.prototype._regexpConvert = function _regexpConvert(from, to) {
   });
 };
 
-// Moji.prototype._regexpFilter = function _regexpFilter(mojisyu) {
-//   var match_mojis = [];
-//
-//   this._regexpMap(mojisyu.regexp, function(moji) {
-//   });
-// };
+Moji.prototype._regexpFilter = function _regexpFilter(mojisyu) {
+  var match_mojis = [];
+
+  this._regexpMap(mojisyu, function(moji, is_match) {
+    if (is_match) {
+      match_mojis.push(moji);
+    }
+  });
+
+  return match_mojis.join('');
+};
 
 
 /**
