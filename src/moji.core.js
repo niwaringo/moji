@@ -89,9 +89,15 @@ Moji.prototype.convert = function convert(from_name, to_name) {
   return this;
 };
 
+Moji.prototype._rangeMap = function _rangeEach(callback) {
+  return this.result.split('').map(function(moji) {
+    return callback.call(this, moji);
+  });
+};
+
 Moji.prototype._rangeConvert = function _rangeConvert(from, to) {
   var distance = to.start - from.start;
-  return this.result.split('').map(function(moji) {
+  return this._rangeMap(function(moji) {
     var code = moji.charCodeAt(0);
     if (code >= from.start && code <= from.end) {
       return String.fromCharCode(code + distance);
@@ -109,6 +115,10 @@ Moji.prototype._regexpConvert = function _regexpConvert(from, to) {
     return to.list[index];
   });
 };
+
+// Moji.prototype.filter = function filter(mojisyu) {
+//   
+// }
 
 /**
  * trim
