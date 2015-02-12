@@ -6,6 +6,20 @@ Moji.js
 インストール
 ------------
 
+### ブラウザ
+
+[ダウンロード](https://raw.githubusercontent.com/niwaringo/moji/master/src/moji.standalone.js)
+
+```javascript
+<script src="/path/to/script/moji.standalone.js"></script>
+<script>
+$('hoge input')
+  .val(new Moji($('hoge input').val()).convert('ZE', 'HE').toString());
+</script>
+```
+
+### npm & require
+
 ```javascript
 npm i moji
 ```
@@ -59,9 +73,13 @@ new Moji('ｱｲｳｴｵ').convert(['HK', 'ZK'], ['KK', 'HG']).toString();
 // -> あいうえお
 ```
 
+---
+
 ### trim()
 
 trim
+
+---
 
 ### toString()
 
