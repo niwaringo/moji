@@ -1,7 +1,16 @@
-Moji.js
-=======
+Moji.js [![npm version](https://badge.fury.io/js/moji.svg)](http://badge.fury.io/js/moji)
+=========================================================================================
 
-半角英数↔全角英数、半角カナ↔全角カナ、ひらがな↔カタカナ変換等の日本語ツール
+<a href="https://saucelabs.com/u/niwaringo_moji"> <img src="https://saucelabs.com/browser-matrix/niwaringo_moji.svg" alt="Sauce Test Status"/></a>
+
+半角英数↔全角英数、半角カナ↔全角カナ、ひらがな↔カタカナ変換等のJavaScriptライブラリ
+
+出来る事
+--------
+
+-	文字種の変換 (convert)
+-	文字種の絞込 (fileter)
+-	空白削除 (trim)
 
 インストール
 ------------
@@ -31,7 +40,7 @@ var Moji = require('moji');
 使い方
 ------
 
-###convert(文字種変換)
+###convert()
 
 `convert('変換元文字種', '変換先文字種')`
 
@@ -77,13 +86,31 @@ new Moji('ｱｲｳｴｵ').convert(['HK', 'ZK'], ['KK', 'HG']).toString();
 
 ### trim()
 
-trim
+`trim()`\`
 
 ---
 
 ### toString()
 
+`toString()`
+
 基本的にメソッドはメソッドチェーンでつなぐ事を想定しているため、文字列の取得は最後に`toString`で文字列に変換してください。
+
+---
+
+### filter()
+
+指定した文字種で絞込ます。
+
+`filter('絞り込みたい文字種')`
+
+```javascript
+/** ひらがなを絞込 **/
+new Moji('abcあいうアイウ123').filter('HG');
+// -> あいう
+```
+
+---
 
 文字種
 ------

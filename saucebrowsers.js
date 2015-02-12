@@ -1,5 +1,5 @@
 var version = require('./package.json').version;
-var build = 'build:' + version;
+var build = 'build:' + version + ' - 0';
 var chrome_version = '39';
 var firefox_version = '35';
 
