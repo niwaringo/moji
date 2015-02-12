@@ -4,7 +4,8 @@
   "description": "半角全角変換など日本語を便利に扱うライブラリ",
   "main": "src/moji.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha",
+    "build": "./node_modules/browserify/bin/cmd.js ./src/moji.js -s Moji > ./src/moji.standalone.js"
   },
   "repository": {
     "type": "git",
