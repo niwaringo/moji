@@ -1,6 +1,6 @@
 {
   "name": "moji",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "半角全角変換など日本語を便利に扱うライブラリ",
   "main": "src/moji.js",
   "scripts": {
