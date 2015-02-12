@@ -103,6 +103,7 @@ Moji.prototype.filter = function filter(mojisyu_name) {
   }
 
   if(this._mojisyuType(mojisyu) === 'regexp') {
+    return this._regexpFilter(mojisyu);
   }
 };
 
@@ -124,18 +125,18 @@ Moji.prototype._mojisyuType = function _mojisyuType(mojisyu) {
   return '';
 };
 
-Moji.prototype._rangeMap = function _rangeEach(mojisyu, callback) {
+Moji.prototype._rangeMap = function _rangeMap(mojisyu, callback) {
   return this.result.split('').map(function(moji) {
     var code = moji.charCodeAt(0);
-    var is_range = (code >= mojisyu.start && code <= mojisyu.end);
-    return callback.call(this, moji, is_range, code);
+    var is_match = (code >= mojisyu.start && code <= mojisyu.end);
+    return callback.call(this, moji, is_match, code);
   });
 };
 
 Moji.prototype._rangeConvert = function _rangeConvert(from, to) {
   var distance = to.start - from.start;
-  return this._rangeMap(from, function(moji, is_range, code) {
-    if (is_range) {
+  return this._rangeMap(from, function(moji, is_match, code) {
+    if (is_match) {
       return String.fromCharCode(code + distance);
     }
     return moji;
@@ -151,25 +152,30 @@ Moji.prototype._rangeFilter = function _rangeFilter(mojisyu) {
   }).join('');
 };
 
-Moji.prototype._regexpMap = function _regexpMap(regexp, callback) {
-  return this.result.replace(regexp, function(moji) {
-    return callback.call(this, moji);
+Moji.prototype._regexpMap = function _regexpMap(mojisyu, callback) {
+  return this.result.replace(mojisyu.regexp, function(moji) {
+    var index = mojisyu.list.indexOf(moji);
+    var is_match = index >= 0;
+    return callback.call(this, moji, is_match, index);
   });
 };
 
 Moji.prototype._regexpConvert = function _regexpConvert(from, to) {
-  return this._regexpMap(from.regexp, function(moji) {
-    var index = from.list.indexOf(moji);
-    if (index < 0) {
+  return this._regexpMap(from, function(moji, is_match, index) {
+    if (!is_match) {
       return moji;
     }
     return to.list[index];
   });
 };
 
-// Moji.prototype.filter = function filter(mojisyu) {
-//   
-// }
+// Moji.prototype._regexpFilter = function _regexpFilter(mojisyu) {
+//   var match_mojis = [];
+//
+//   this._regexpMap(mojisyu.regexp, function(moji) {
+//   });
+// };
+
 
 /**
  * trim
@@ -180,7 +186,7 @@ Moji.prototype.trim = function trim() {
   return this;
 };
 
-//get filter remove
+//reject
 /**
  * @returns {string}
  */
