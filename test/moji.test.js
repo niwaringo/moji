@@ -78,4 +78,18 @@ describe('moji', function(){
       new Moji(hk + 'abcあいう123' + zk).filter('ZK'),
       zk);
   });
+
+  it('reject range', function() {
+    assert.strictEqual(
+      new Moji('abcあいうアイウ123').reject('HG'),
+      'abcアイウ123');
+  });
+
+  it('reject regexp', function() {
+    var hk = Moji.mojisyu('HK').list.join('');
+    var zk = Moji.mojisyu('ZK').list.join('');
+    assert.strictEqual(
+      new Moji(hk + zk + 'abcあいう123').reject('ZK'),
+      hk + 'abcあいう123');
+  });
 });
