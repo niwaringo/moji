@@ -69,7 +69,7 @@ Moji.mojisyu = function mojisyu(name, definition) {
  */
 Moji.prototype.convert = function convert(from_name, to_name) {
   // 複数一括指定の場合
-  if (Object.prototype.toString.call(arguments[0]) === '[object Array]') {
+  if (isArray(arguments[0])) {
     Array.prototype.slice.call(arguments).forEach(function(arg) {
       this.convert(arg[0], arg[1]);
     }, this);
@@ -93,7 +93,7 @@ Moji.prototype.convert = function convert(from_name, to_name) {
 /**
  *  filter
  *  文字種のみに絞込
- *  @param {string} mojisyu 絞り込まれる文字種
+ *  @param {string || array<string>} mojisyu_name 絞り込まれる文字種
  *  @returns {string}
  */
 Moji.prototype.filter = function filter(mojisyu_name) {
@@ -105,6 +105,24 @@ Moji.prototype.filter = function filter(mojisyu_name) {
 
   if(this._mojisyuType(mojisyu) === 'regexp') {
     return this._regexpFilter(mojisyu);
+  }
+};
+
+/**
+ * reject
+ * 文字種は排除
+ * @param {string} mojisyu 排除される文字種
+ * @returns {string}
+ */
+Moji.prototype.reject = function reject(mojisyu_name) {
+  var mojisyu = this.MOJISYU[mojisyu_name];
+
+  if (this._mojisyuType(mojisyu) === 'range') {
+    return this._rangeReject(mojisyu);
+  }
+
+  if (this._mojisyuType(mojisyu) === 'regexp') {
+    return this._regexpReject(mojisyu);
   }
 };
 
@@ -153,6 +171,15 @@ Moji.prototype._rangeFilter = function _rangeFilter(mojisyu) {
   }).join('');
 };
 
+Moji.prototype._rangeReject = function _rangeReject(mojisyu) {
+  return this._rangeMap(mojisyu, function(moji, is_range) {
+    if(!is_range) {
+      return moji;
+    }
+    return '';
+  }).join('');
+};
+
 Moji.prototype._regexpMap = function _regexpMap(mojisyu, callback) {
   return this.result.replace(mojisyu.regexp, function(moji) {
     var index = mojisyu.list.indexOf(moji);
@@ -172,16 +199,19 @@ Moji.prototype._regexpConvert = function _regexpConvert(from, to) {
 
 Moji.prototype._regexpFilter = function _regexpFilter(mojisyu) {
   var match_mojis = [];
-
   this._regexpMap(mojisyu, function(moji, is_match) {
     if (is_match) {
       match_mojis.push(moji);
     }
   });
-
   return match_mojis.join('');
 };
 
+Moji.prototype._regexpReject = function _regexpReject(mojisyu) {
+  var match_mojis = [];
+  var reject_moji = this._regexpFilter(mojisyu);
+  return this.result.replace(reject_moji, '');
+};
 
 /**
  * trim
@@ -201,6 +231,10 @@ Moji.prototype.toString = function toString() {
 };
 
 module.exports = Moji;
+
+function isArray(target) {
+  return Object.prototype.toString.call(target) === '[object Array]';
+}
 
 },{}],2:[function(require,module,exports){
 var Moji = require('./moji.core.js');

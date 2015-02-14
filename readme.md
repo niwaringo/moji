@@ -10,6 +10,7 @@ Moji.js [![npm version](https://badge.fury.io/js/moji.svg)](http://badge.fury.io
 
 -	文字種の変換 (convert)
 -	文字種の絞込 (fileter)
+-	文字種の排除 (reject)
 -	空白削除 (trim)
 
 インストール
@@ -108,6 +109,18 @@ new Moji('ｱｲｳｴｵ').convert(['HK', 'ZK'], ['KK', 'HG']).toString();
 /** ひらがなを絞込 **/
 new Moji('abcあいうアイウ123').filter('HG');
 // -> あいう
+```
+
+### reject()
+
+指定した文字種を排除します。
+
+`reject('排除したい文字種')`
+
+```javascript
+/** ひらがなを排除 **/
+new Moji('abcあいうアイウ123').reject('HG');
+// -> abcアイウ123
 ```
 
 ---
