@@ -1,7 +1,7 @@
 var version = require('./package.json').version;
 var build = 'build:' + version + ' - 0';
-var chrome_version = '39';
-var firefox_version = '35';
+var chrome_version = '43';
+var firefox_version = '39';
 
 module.exports = {
   //Chrome
@@ -96,11 +96,11 @@ module.exports = {
 
   //iphone
   iphone: {
-    testName: 'iphone-8.1',
+    testName: 'iphone-8.2',
     base: 'SauceLabs',
     browserName: 'iphone',
     platform: 'OS X 10.10',
-    version: '8.1',
+    version: '8.2',
     build: build,
     passed: true,
     public: 'public'

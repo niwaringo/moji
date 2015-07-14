@@ -13,6 +13,8 @@ Moji.js [![npm version](https://badge.fury.io/js/moji.svg)](http://badge.fury.io
 -	文字種の排除 (reject)
 -	空白削除 (trim)
 
+※ 文字種[半角英数、全角英数など]
+
 インストール
 ------------
 
@@ -35,7 +37,7 @@ npm i moji
 ```
 
 ```javascript
-var Moji = require('moji');
+var moji = require('moji');
 ```
 
 使い方
@@ -47,39 +49,39 @@ var Moji = require('moji');
 
 ```javascript
 /** 全角英数 → 半角英数 **/
-new Moji('ＡＢＣＤ０１２３４').convert('ZE', 'HE').toString();
+moji('ＡＢＣＤ０１２３４').convert('ZE', 'HE').toString();
 // -> ABCD01234
 
 /** 半角英数 → 全角英数 **/
-new Moji('ABCD01234').convert('HE', 'ZE').toString();
+moji('ABCD01234').convert('HE', 'ZE').toString();
 // -> ＡＢＣＤ０１２３４
 
 /** 全角スペース → 全角スペース **/
-new Moji('　').convert('ZS', 'HS').toString();
+moji('　').convert('ZS', 'HS').toString();
 // -> ' '
 
 /** ひらがな → カタカナ **/
-new Moji('あいうえお').convert('HG', 'KK').toString();
+moji('あいうえお').convert('HG', 'KK').toString();
 // -> アイウエオ
 
 /** カタカナ → ひらがな **/
-new Moji('アイウエオ').convert('KK', 'HG').toString();
+moji('アイウエオ').convert('KK', 'HG').toString();
 // -> あいうえお
 
 /** 全角カナ → 半角カナ **/
-new Moji('アイウエオ').convert('ZK', 'HK').toString();
+moji('アイウエオ').convert('ZK', 'HK').toString();
 // -> ｱｲｳｴｵ
 
 /** 半角カナ → 全角カナ **/
-new Moji('ｱｲｳｴｵ').convert('HK', 'ZK').toString(),
+moji('ｱｲｳｴｵ').convert('HK', 'ZK').toString(),
 // -> アイウエオ
 ```
 
-配列指定で一括変換が可能です。
+メソッドチェーンで繋いで変換
 
 ```javascript
 /** [半角カナ] → [全角カナ] → [ひらがな] **/
-new Moji('ｱｲｳｴｵ').convert(['HK', 'ZK'], ['KK', 'HG']).toString();
+moji('ｱｲｳｴｵ').convert('HK', 'ZK').convert('KK', 'HG').toString();
 // -> あいうえお
 ```
 
@@ -107,7 +109,7 @@ new Moji('ｱｲｳｴｵ').convert(['HK', 'ZK'], ['KK', 'HG']).toString();
 
 ```javascript
 /** ひらがなを絞込 **/
-new Moji('abcあいうアイウ123').filter('HG');
+moji('abcあいうアイウ123').filter('HG').toString();
 // -> あいう
 ```
 
@@ -119,7 +121,7 @@ new Moji('abcあいうアイウ123').filter('HG');
 
 ```javascript
 /** ひらがなを排除 **/
-new Moji('abcあいうアイウ123').reject('HG');
+moji('abcあいうアイウ123').reject('HG').toString();
 // -> abcアイウ123
 ```
 
@@ -150,14 +152,15 @@ new Moji('abcあいうアイウ123').reject('HG');
 追加例)
 
 ```javascript
-Moji.mojisyu('文字種名', {start: 開始文字コード, end: 終了文字コード});
-Moji.mojisyu('文字種名', {regxp: 正規表現, list: 文字列の配列});
+moji.addMojisyu('文字種名', {start: 開始文字コード, end: 終了文字コード});
+moji.addMojisyu('文字種名', {regxp: 正規表現, list: 文字列の配列});
 ```
 
+例)
 ```javascript
-var Moji = require('Moji');
-Moji.mojisyu('ZE', {start:0xff01, end:0xff5e}); // 全角英数
-Moji.mojisyu('HK', {
+moji = require('Moji');
+moji.addMojisyu('ZE', {start:0xff01, end:0xff5e}); // 全角英数
+moji.addMojisyu('HK', {
   regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g,
   list: ["｡", "｢", "｣"]
   });
