@@ -223,15 +223,5 @@ Moji.prototype._regexpMap = function _regexpMap(mojisyu, callback) {
         return callback.call(this, moji, is_match, index);
     });
 };
-//
-///**
-// * trim
-// * 行頭、行末の空白を削除
-// */
-//Moji.prototype.trim = function trim() {
-//  this.result = this.result.trim();
-//  return this;
-//};
-//
 
 module.exports = Moji;
