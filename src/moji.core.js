@@ -30,11 +30,13 @@ Moji.prototype.convert = function convert(from_syumei, to_syumei) {
     var to_mojisyu_body = this._mojisyu[to_syumei];
 
     if (this._mojisyuType(from_mojisyu_body) === 'range' && this._mojisyuType(to_mojisyu_body) === 'range') {
-        return this._rangeConvert(from_mojisyu_body, to_mojisyu_body);
+        this._result = this._rangeConvert(from_mojisyu_body, to_mojisyu_body);
+        return this;
     }
 
     if (this._mojisyuType(from_mojisyu_body) === 'regexp' && this._mojisyuType(to_mojisyu_body) === 'regexp') {
-        return this._regexpConvert(from_mojisyu_body, to_mojisyu_body);
+        this._result = this._regexpConvert(from_mojisyu_body, to_mojisyu_body);
+        return this;
     }
 };
 
@@ -42,37 +44,33 @@ Moji.prototype.convert = function convert(from_syumei, to_syumei) {
  * _rangeConvert
  * @param {object} from_syu
  * @param {object} to_syu
- * @return {Moji}
+ * @return {string}
  * @private
  */
 Moji.prototype._rangeConvert = function _rangeConvert(from_syu, to_syu) {
     var distance = to_syu.start - from_syu.start;
-    this._result = this._rangeMap(from_syu, function (moji, is_match, code) {
+    return this._rangeMap(from_syu, function (moji, is_match, code) {
         if (is_match) {
             return String.fromCharCode(code + distance);
         }
         return moji;
     }).join('');
-
-    return this;
 };
 
 /**
  * _regexpConvert
  * @param from_syu
  * @param to_syu
- * @return {Moji}
+ * @return {string}
  * @private
  */
 Moji.prototype._regexpConvert = function _regexpConvert(from_syu, to_syu) {
-    this._result = this._regexpMap(from_syu, function (moji, is_match, index) {
+    return this._regexpMap(from_syu, function (moji, is_match, index) {
         if (!is_match) {
             return moji;
         }
         return to_syu.list[index];
     });
-
-    return this;
 };
 
 
@@ -131,7 +129,7 @@ Moji.prototype._regexpFilter = function _regexpFilter(mojisyu) {
 /**
  * reject
  * 文字種は排除
- * @param {string} mojisyu 排除される文字種
+ * @param {string} mojisyu_name 排除される文字種
  * @returns {Moji}
  */
 Moji.prototype.reject = function reject(mojisyu_name) {
@@ -170,7 +168,6 @@ Moji.prototype._rangeReject = function _rangeReject(mojisyu) {
  * @private
  */
 Moji.prototype._regexpReject = function _regexpReject(mojisyu) {
-    var match_mojis = [];
     var reject_moji = this._regexpFilter(mojisyu);
     return this._result.replace(reject_moji, '');
 };
@@ -180,8 +177,8 @@ Moji.prototype._regexpReject = function _regexpReject(mojisyu) {
  * _mojisyuType
  * 文字種のタイプを判別
  * range || regexp
- * @param {MOJISYU} mojisyu 文字種
- * @return {string} range || regxp || ''
+ * @param {mojisyu} mojisyu 文字種
+ * @return {string}
  */
 Moji.prototype._mojisyuType = function _mojisyuType(mojisyu) {
     if (mojisyu.start && mojisyu.end) {
