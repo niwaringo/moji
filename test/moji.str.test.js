@@ -20,7 +20,12 @@ describe("moji_str", function() {
         assert.strictEqual(
             moji('あいうえおあ').convert('HG', 'KK').match("").toString(),
             'アイウエオア');
+    });
 
+    it('replace', function () {
+        assert.strictEqual(
+            moji('あああ').replace("あああ", "いいい").convert('HG', 'KK').toString(),
+            'イイイ');
     });
 });
 

@@ -23,13 +23,17 @@ function mojiStr() {
         return this;
     };
 
+
+    this.replace = function(regexp, new_str) {
+        this._result = this._result.replace(regexp, new_str);
+        return this;
+    };
+
     return this;
 }
 
 module.exports = mojiStr;
 
-//match
-//replace
 // slice
 //substr
 //toLocaleLowerCase
