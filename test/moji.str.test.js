@@ -8,5 +8,19 @@ describe("moji_str", function() {
             'ア　ア　ア');
     });
 
+    it('match', function () {
+        assert.strictEqual(
+            moji('あいうえおあ').convert('HG', 'KK').match("イウエオ").toString(),
+            'イウエオ');
+
+        assert.strictEqual(
+            moji('あいうえおあ').convert('HG', 'KK').match("イウオ").toString(),
+            'アイウエオア');
+
+        assert.strictEqual(
+            moji('あいうえおあ').convert('HG', 'KK').match("").toString(),
+            'アイウエオア');
+
+    });
 });
 

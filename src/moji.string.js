@@ -8,14 +8,27 @@ function mojiStr() {
         return this;
     };
 
+    /**
+     * match
+     * matchした文字列に変更
+     * matchしなければなにもしない
+     * @param {RegExp} regexp
+     */
+    this.match = function(regexp) {
+        var result = this._result.match(regexp);
+
+        if (!result || !regexp) return this;
+
+        this._result = result.toString();
+        return this;
+    };
+
     return this;
 }
 
 module.exports = mojiStr;
 
 //match
-//encode
-//decode
 //replace
 // slice
 //substr
