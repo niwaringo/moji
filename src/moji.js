@@ -1,18 +1,16 @@
-"use strict";
-var Moji = require("./moji.core");
-var mojiStr = require("./moji.string");
-var _mojisyu = require("./default_mojisyu");
-var assign = require("object-assign");
-var mojisyu = assign({}, _mojisyu);
+const Moji = require("./core");
+const defaultMojisyu = require("./default_mojisyu");
+const Mojisyu = require("./mojisyu");
 
-mojiStr.call(Moji.prototype);
+let mojisyu = {};
+Object.keys(defaultMojisyu).forEach((m) => {
+    mojisyu[m] = new Mojisyu(m, defaultMojisyu[m]);
+});
 
-var moji = function (str) {
-    return new Moji(mojisyu, str);
+/**
+ * @param {String} str
+ * @return {Moji}
+ */
+module.exports = (str) => {
+    return new Moji(str, mojisyu);
 };
-
-moji.addMojisyu = function (syu) {
-    mojisyu = assign(mojisyu, syu);
-};
-
-module.exports = moji;
