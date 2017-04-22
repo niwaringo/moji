@@ -37,15 +37,5 @@
     "mocha": "^3.2.0",
     "webpack": "^2.4.1"
   },
-  "dependencies": {},
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "comments": false
-        }
-      ]
-    ]
-  }
+  "dependencies": {}
 }
