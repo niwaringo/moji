@@ -1,7 +1,9 @@
-/* globals describe, it */
 const assert = require("assert");
-const moji = require("../src/moji");
-const mojisyu = require("../src/default_mojisyu");
+let moji = require("../src/moji");
+
+if(typeof window !== "undefined") {
+    moji = window.moji;
+}
 
 describe("moji", () => {
     it("toCharCode", () => {
