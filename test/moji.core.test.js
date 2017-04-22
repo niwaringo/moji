@@ -5,7 +5,7 @@ if(typeof window !== "undefined") {
     moji = window.moji;
 }
 
-describe("moji", () => {
+describe("moji.cores", () => {
     it("toCharCode", () => {
         assert.strictEqual(
             moji("ABC").toCharCode(),
