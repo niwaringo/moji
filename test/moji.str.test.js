@@ -11,4 +11,10 @@ describe("moji.str", () => {
             moji("　あ　あ　あ　").trim().convert("HG", "KK").toString(),
             "ア　ア　ア");
     });
+
+    it("replace", function() {
+        assert.strictEqual(
+            moji("あああ").replace("あああ", "いいい").convert("HG", "KK").toString(),
+            "イイイ");
+    });
 });

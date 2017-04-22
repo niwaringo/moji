@@ -71,6 +71,16 @@ class Moji {
         this._str = str.trim(this._str);
         return this;
     }
+
+    /**
+     * @param {string|RegExp} pattern
+     * @param {string|function}  replacement
+     * @return {Moji}
+     */
+    replace(pattern, replacement) {
+        this._str = str.replace(this._str, pattern, replacement);
+        return this;
+    }
 }
 
 let mojisyu = {};

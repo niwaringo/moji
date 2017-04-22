@@ -515,6 +515,19 @@ var Moji = function () {
             this._str = str.trim(this._str);
             return this;
         }
+
+        /**
+         * @param {string|RegExp} pattern
+         * @param {string|function}  replacement
+         * @return {Moji}
+         */
+
+    }, {
+        key: "replace",
+        value: function replace(pattern, replacement) {
+            this._str = str.replace(this._str, pattern, replacement);
+            return this;
+        }
     }]);
 
     return Moji;
@@ -547,6 +560,9 @@ module.exports = {
      */
     trim: function trim(str) {
         return str.trim();
+    },
+    replace: function replace(str, pattern, replacement) {
+        return str.replace(pattern, replacement);
     }
 };
 

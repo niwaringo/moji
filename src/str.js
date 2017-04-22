@@ -6,4 +6,8 @@ module.exports = {
     trim(str) {
         return str.trim();
     },
+
+    replace(str, pattern, replacement) {
+        return str.replace(pattern, replacement);
+    },
 };
