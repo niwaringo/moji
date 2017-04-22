@@ -421,6 +421,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var core = __webpack_require__(1);
+var str = __webpack_require__(8);
 var defaultMojisyu = __webpack_require__(2);
 var Mojisyu = __webpack_require__(3);
 /**
@@ -481,7 +482,7 @@ var Moji = function () {
         }
 
         /**
-         * @return {string|*|String}
+         * @return {string}
          */
 
     }, {
@@ -491,7 +492,7 @@ var Moji = function () {
         }
 
         /**
-         * @param {String} separateString
+         * @param {string} separateString
          * @return {string}
          */
 
@@ -502,6 +503,17 @@ var Moji = function () {
             return this._str.split("").map(function (s) {
                 return s.charCodeAt(0);
             }).join(ss);
+        }
+
+        /**
+         * @return {Moji}
+         */
+
+    }, {
+        key: "trim",
+        value: function trim() {
+            this._str = str.trim(this._str);
+            return this;
         }
     }]);
 
@@ -519,6 +531,23 @@ Object.keys(defaultMojisyu).forEach(function (m) {
  */
 module.exports = function (str) {
     return new Moji(str, mojisyu);
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+    /**
+     * @param {string} str
+     * @return {string}
+     */
+    trim: function trim(str) {
+        return str.trim();
+    }
 };
 
 /***/ })

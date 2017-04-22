@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha",
     "karma": "karma start",
-    "build": "webpack"
+    "build": "webpack",
+    "build:w": "webpack --watch"
   },
   "repository": {
     "type": "git",

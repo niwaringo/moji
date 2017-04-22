@@ -1,4 +1,5 @@
 const core = require("./core");
+const str = require("./str");
 const defaultMojisyu = require("./default_mojisyu");
 const Mojisyu = require("./mojisyu");
 /**
@@ -46,14 +47,14 @@ class Moji {
     }
 
     /**
-     * @return {string|*|String}
+     * @return {string}
      */
     toString() {
         return this._str;
     }
 
     /**
-     * @param {String} separateString
+     * @param {string} separateString
      * @return {string}
      */
     toCharCode(separateString) {
@@ -61,6 +62,14 @@ class Moji {
         return this._str.split("").map((s) => {
             return s.charCodeAt(0);
         }).join(ss);
+    }
+
+    /**
+     * @return {Moji}
+     */
+    trim() {
+        this._str = str.trim(this._str);
+        return this;
     }
 }
 
