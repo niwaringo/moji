@@ -1,5 +1,5 @@
 const assert = require("assert");
-let moji = require("../src/moji");
+let moji = require("../dist/moji");
 
 if(typeof window !== "undefined") {
     moji = window.moji;
