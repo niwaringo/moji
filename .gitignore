@@ -30,3 +30,4 @@ node_modules
 .DS_Store
 .idea
 .yarnclean
+/test/config/sauceconfg.json

@@ -5,7 +5,8 @@
   "main": "dist/moji.js",
   "scripts": {
     "test": "mocha",
-    "karma": "karma start",
+    "karma": "karma start test/config/karma.conf.js",
+    "karma:saucelabs": "SET SAUCE_LABS=true && npm run karma",
     "build": "webpack",
     "build:w": "webpack --watch"
   },
