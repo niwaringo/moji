@@ -421,7 +421,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var core = __webpack_require__(1);
-var str = __webpack_require__(8);
 var defaultMojisyu = __webpack_require__(2);
 var Mojisyu = __webpack_require__(3);
 /**
@@ -506,26 +505,22 @@ var Moji = function () {
         }
 
         /**
+         * 渡されたmethodをそのままString渡す
+         * @param {string} method
+         * @param {args} args
          * @return {Moji}
          */
 
     }, {
-        key: "trim",
-        value: function trim() {
-            this._str = str.trim(this._str);
-            return this;
-        }
+        key: "string",
+        value: function string(method) {
+            var _String$prototype$met;
 
-        /**
-         * @param {string|RegExp} pattern
-         * @param {string|function}  replacement
-         * @return {Moji}
-         */
+            for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+                args[_key - 1] = arguments[_key];
+            }
 
-    }, {
-        key: "replace",
-        value: function replace(pattern, replacement) {
-            this._str = str.replace(this._str, pattern, replacement);
+            this._str = (_String$prototype$met = String.prototype[method]).call.apply(_String$prototype$met, [this._str].concat(args));
             return this;
         }
     }]);
@@ -544,26 +539,6 @@ Object.keys(defaultMojisyu).forEach(function (m) {
  */
 module.exports = function (str) {
     return new Moji(str, mojisyu);
-};
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-    /**
-     * @param {string} str
-     * @return {string}
-     */
-    trim: function trim(str) {
-        return str.trim();
-    },
-    replace: function replace(str, pattern, replacement) {
-        return str.replace(pattern, replacement);
-    }
 };
 
 /***/ })

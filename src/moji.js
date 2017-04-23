@@ -1,5 +1,4 @@
 const core = require("./core");
-const str = require("./str");
 const defaultMojisyu = require("./default_mojisyu");
 const Mojisyu = require("./mojisyu");
 /**
@@ -65,20 +64,13 @@ class Moji {
     }
 
     /**
+     * 渡されたmethodをそのままString渡す
+     * @param {string} method
+     * @param {args} args
      * @return {Moji}
      */
-    trim() {
-        this._str = str.trim(this._str);
-        return this;
-    }
-
-    /**
-     * @param {string|RegExp} pattern
-     * @param {string|function}  replacement
-     * @return {Moji}
-     */
-    replace(pattern, replacement) {
-        this._str = str.replace(this._str, pattern, replacement);
+    string(method, ...args) {
+        this._str = String.prototype[method].call(this._str, ...args);
         return this;
     }
 }

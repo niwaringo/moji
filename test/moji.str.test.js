@@ -6,15 +6,21 @@ if(typeof window !== "undefined") {
 }
 
 describe("moji.str", () => {
-    it("trim", function() {
+    it("trim", () => {
         assert.strictEqual(
-            moji("　あ　あ　あ　").trim().convert("HG", "KK").toString(),
+            moji("　あ　あ　あ　").string("trim").convert("HG", "KK").toString(),
             "ア　ア　ア");
     });
 
-    it("replace", function() {
+    it("replace", () => {
         assert.strictEqual(
-            moji("あああ").replace("あああ", "いいい").convert("HG", "KK").toString(),
+            moji("あああ").string("replace", "あああ", "いいい").convert("HG", "KK").toString(),
             "イイイ");
     });
+
+    it("substr",  () => {
+        assert.strictEqual(
+            moji("abcdefghij").string("substr", 1, 2).toString(),
+            "bc");
+    })
 });
