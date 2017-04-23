@@ -1,8 +1,15 @@
 // Karma configuration
-const sauceEnv = process.env.SAUCE_LABS;
 const customLaunchers = require("./saucebrowsers");
-const browsers = !sauceEnv? ["Chrome"]: sauceBrowsers();
 const sauceConfig = require("./sauceconfg.json");
+let browsers = ["Chrome"];
+
+if (process.env.TEST_IE_EDGE) {
+    browsers = ["IE", "Edge"];
+}
+
+if (process.env.SAUCE_LABS) {
+    browsers = sauceBrowsers();
+}
 
 module.exports = function(config) {
     config.set({
@@ -28,6 +35,18 @@ module.exports = function(config) {
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             "test/*.js": ["webpack"],
+        },
+
+        webpack: {
+            module: {
+                rules: [{
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: "babel-loader",
+                    },
+                }],
+            },
         },
 
         // test results reporter to use
