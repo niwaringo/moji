@@ -1,21 +1,15 @@
 // Karma configuration
-const customLaunchers = require("./saucebrowsers");
-const sauceConfig = require("./sauceconfg.json");
 let browsers = ["Chrome"];
 
 if (process.env.TEST_IE_EDGE) {
     browsers = ["IE", "Edge"];
 }
 
-if (process.env.SAUCE_LABS) {
-    browsers = sauceBrowsers();
-}
-
 module.exports = function(config) {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: "../../",
+        basePath: "",
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -24,7 +18,7 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             "dist/moji.js",
-            {pattern: "test/*.test.js", watched: false},
+            "test/*.test.js",
         ],
 
         // list of files to exclude
@@ -71,26 +65,12 @@ module.exports = function(config) {
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers,
 
-        customLaunchers,
-
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: true,
-
-        sauceLabs: {
-            username: sauceConfig.username,
-            accessKey: sauceConfig.accessKey,
-        },
 
         // Concurrency level
         // how many browser should be started simultaneous
         concurrency: 3,
     });
 };
-
-/**
- * @return {Array}
- */
-function sauceBrowsers() {
-    return Object.keys(customLaunchers);
-}
