@@ -1,11 +1,11 @@
 /* globals describe, it */
 const assert = require("assert");
 const Mojisyu = require("../src/mojisyu");
-const defalutMojisyu = require("../src/default_mojisyu");
+const defaultMojisyu = require("../src/default_mojisyu");
 
 describe("Mojisyu", () => {
-    const mZE = new Mojisyu("ZE", defalutMojisyu.ZE);
-    const mHS = new Mojisyu("HS", defalutMojisyu.HS);
+    const mZE = new Mojisyu("ZE", defaultMojisyu.ZE);
+    const mHS = new Mojisyu("HS", defaultMojisyu.HS);
 
     it("range type", () => {
         assert.ok(mZE.types.range, "range");
