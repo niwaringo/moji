@@ -1,26 +1,18 @@
 Moji.js [![npm version](https://badge.fury.io/js/moji.svg)](http://badge.fury.io/js/moji)
 =========================================================================================
 
-<a href="https://saucelabs.com/u/niwaringo_moji"> <img src="https://saucelabs.com/browser-matrix/niwaringo_moji.svg" alt="Sauce Test Status"/></a>
-
 半角英数↔全角英数、半角カナ↔全角カナ、ひらがな↔カタカナ変換等のJavaScriptライブラリ
 
-出来る事
---------
-
--	文字種の変換 (convert)
--	文字種の絞込 (fileter)
--	文字種の排除 (reject)
--	空白削除 (trim)
-
-※ 文字種[半角英数、全角英数など]
+## 注意
+githubはversion1になっていますが、npmはver0.5系のままですので、ご注意ください。
+最終確認後、npmもversion1にあげます。
 
 インストール
 ------------
 
 ### ブラウザ
 
-[ダウンロード](https://raw.githubusercontent.com/niwaringo/moji/master/src/moji.standalone.js)
+[ダウンロード](https://raw.githubusercontent.com/niwaringo/moji/master/dist/moji.js)
 
 ```javascript
 <script src="/path/to/script/moji.standalone.js"></script>
