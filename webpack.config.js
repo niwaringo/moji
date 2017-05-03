@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = [{
-    entry: "./src/moji.js",
+    entry: "./src/index.js",
     output: {
         filename: "./dist/moji.js",
         library: "moji",

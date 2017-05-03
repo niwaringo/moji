@@ -73,11 +73,35 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Moji = __webpack_require__(2);
+var defaultMojisyu = __webpack_require__(7);
+var Mojisyu = __webpack_require__(8);
+
+var mojisyu = {};
+Object.keys(defaultMojisyu).forEach(function (m) {
+    mojisyu[m] = new Mojisyu(m, defaultMojisyu[m]);
+});
+
+/**
+ * @param {String} str
+ * @return {Moji}
+ */
+module.exports = function (str) {
+    return new Moji(str, mojisyu);
+};
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -115,304 +139,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var convert = __webpack_require__(4);
-var filter = __webpack_require__(5);
-var reject = __webpack_require__(6);
-
-module.exports = {
-    convert: convert,
-    filter: filter,
-    reject: reject
-};
-
-/***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-    'ZE': { start: 0xff01, end: 0xff5e }, // 全角英数
-    'HE': { start: 0x0021, end: 0x007e }, // 半角英数
-    'HG': { start: 0x3041, end: 0x3096 }, // ひらがな
-    'KK': { start: 0x30a1, end: 0x30f6 }, // カタカナ
-
-    'HS': { patterns: [[/(\s|\u00A0)/g, { "ZS": "　" }]] }, // 半角スペース
-    'ZS': { patterns: [[/(\u3000)/g, { "HS": " " }]] }, //全角スペース
-
-    'HK': { regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g, // 半角カナ
-        list: ['｡', '｢', '｣', '､', '･', 'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｰ', 'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ', 'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ', 'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ', 'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ', 'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ', 'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ', 'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ', 'ﾔ', 'ﾕ', 'ﾖ', 'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ', 'ﾜ', 'ﾝ', 'ﾞ', 'ﾟ', 'ｦﾞ', 'ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ', 'ﾊﾞ', 'ﾊﾟ', 'ﾋﾞ', 'ﾋﾟ', 'ﾌﾞ', 'ﾌﾟ', 'ﾍﾞ', 'ﾍﾟ', 'ﾎﾞ', 'ﾎﾟ', 'ﾜﾞ'] },
-    'ZK': { regexp: /([\u30a1-\u30f6])/g, //全角カナ (半角カナ変換用)
-        list: ['。', '「', '」', '、', '・', 'ヲ', 'ァ', 'ィ', 'ゥ', 'ェ', 'ォ', 'ャ', 'ュ', 'ョ', 'ッ', 'ー', 'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム', 'メ', 'モ', 'ヤ', 'ユ', 'ヨ', 'ラ', 'リ', 'ル', 'レ', 'ロ', 'ワ', 'ン', '゛', '゜', 'ヺ', 'ヴ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド', 'バ', 'パ', 'ビ', 'ピ', 'ブ', 'プ', 'ベ', 'ペ', 'ボ', 'ポ', 'ヷ'] }
-};
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * @param {Object} mObj
- * @return {Object}
- */
-function types(mObj) {
-    var o = {};
-    o.range = mObj.start && mObj.end ? true : false;
-    o.regexpList = mObj.regexp && mObj.list ? true : false;
-    o.patterns = mObj.patterns ? true : false;
-    return o;
-}
-
-/**
- * @type {Mojisyu}
- */
-module.exports =
-/**
- * @param {String} name
- * @param {Object} mObj
- */
-function Mojisyu(name, mObj) {
-    _classCallCheck(this, Mojisyu);
-
-    this.name = name;
-    this.types = types(mObj);
-    this.props = {};
-
-    _extends(this.props, mObj);
-};
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var map = __webpack_require__(0);
-
-module.exports = function convert(str, fromMojisyu, toMojisyu) {
-    if (fromMojisyu.types.range && toMojisyu.types.range) {
-        str = rangeConvert(str, fromMojisyu, toMojisyu);
-    }
-    if (fromMojisyu.types.regexpList && toMojisyu.types.regexpList) {
-        str = regexpListConvert(str, fromMojisyu, toMojisyu);
-    }
-    if (fromMojisyu.types.patterns) {
-        str = patternConvert(str, fromMojisyu, toMojisyu);
-    }
-    return str;
-};
-
-/**
- * @param {string} str
- * @param {Mojisyu} from
- * @param {Mojisyu} to
- * @return {string}
- * @private
- */
-function rangeConvert(str, from, to) {
-    var d = to.props.start - from.props.start;
-    return map.rangeMap(str, from.props.start, from.props.end, function (match, s, c) {
-        if (!match) {
-            return s;
-        }
-        return String.fromCharCode(c + d);
-    }).join("");
-}
-
-/**
- * @param {string} str
- * @param {Mojisyu} from
- * @param {Mojisyu} to
- * @return {string}
- * @private
- */
-function regexpListConvert(str, from, to) {
-    return map.regexpMap(str, from.props.regexp, function (s) {
-        var i = from.props.list.indexOf(s);
-        if (i === -1) return s;
-        return to.props.list[i];
-    });
-}
-
-/**
- * @param {string} str
- * @param {Mojisyu} from
- * @param {Mojisyu} to
- * @return {string}
- * @private
- */
-function patternConvert(str, from, to) {
-    return from.props.patterns.map(function (pattern) {
-        return map.regexpMap(str, pattern[0], function (s) {
-            return pattern[1][to.name];
-        });
-    }).join("");
-}
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var map = __webpack_require__(0);
-
-/**
- * @param {string} str
- * @param {Mojisyu} filterMojisyu フィルタする文字種名
- * @return {Moji}
- */
-module.exports = function filter(str, filterMojisyu) {
-    if (filterMojisyu.types.range) {
-        str = rangeFilter(str, filterMojisyu);
-    }
-    if (filterMojisyu.types.regexpList) {
-        str = regexpListFilter(str, filterMojisyu);
-    }
-    if (filterMojisyu.types.patterns) {
-        str = patternFilter(str, filterMojisyu);
-    }
-    return str;
-};
-
-/**
- * @param {string} str
- * @param {Mojisyu} filterMojisyu
- * @return {string}
- * @private
- */
-function rangeFilter(str, filterMojisyu) {
-    return map.rangeMap(str, filterMojisyu.props.start, filterMojisyu.props.end, function (match, str, code) {
-        if (!match) {
-            return "";
-        }
-        return str;
-    }).join("");
-}
-
-/**
- * @param {string} str
- * @param {Mojisyu} filterMojisyu
- * @return {string}
- * @private
- */
-function regexpListFilter(str, filterMojisyu) {
-    var r = [];
-    map.regexpMap(str, filterMojisyu.props.regexp, function (s) {
-        var i = filterMojisyu.props.list.indexOf(s);
-        if (i !== -1) {
-            r.push(s);
-        }
-    });
-    return r.join("");
-}
-
-/**
- * @param {string} str
- * @param {Mojisyu} filterMojisyu
- * @return {string}
- * @private
- */
-function patternFilter(str, filterMojisyu) {
-    var r = [];
-    filterMojisyu.props.patterns.forEach(function (pattern) {
-        map.regexpMap(str, pattern[0], function (s) {
-            r.push(s);
-        });
-    });
-    return r.join("");
-}
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var map = __webpack_require__(0);
-
-/**
- * @param {string} str
- * @param {Mojisyu} rejectMojisyu
- * @return {string}
- */
-module.exports = function reject(str, rejectMojisyu) {
-    if (rejectMojisyu.types.range) {
-        str = rangeReject(str, rejectMojisyu);
-    }
-    if (rejectMojisyu.types.regexpList) {
-        str = regexpListReject(str, rejectMojisyu);
-    }
-    if (rejectMojisyu.types.patterns) {
-        str = patternReject(str, rejectMojisyu);
-    }
-    return str;
-};
-
-/**
- * @param {string} str
- * @param {Mojisyu} rejectMojisyu
- * @return {string}
- * @private
- */
-function rangeReject(str, rejectMojisyu) {
-    return map.rangeMap(str, rejectMojisyu.props.start, rejectMojisyu.props.end, function (match, str, code) {
-        if (!match) {
-            return str;
-        }
-        return "";
-    }).join("");
-}
-
-/**
- * @param {string} str
- * @param {Mojisyu} rejectMojisyu
- * @return {string}
- * @private
- */
-function regexpListReject(str, rejectMojisyu) {
-    map.regexpMap(str, rejectMojisyu.props.regexp, function (s) {
-        var i = rejectMojisyu.props.list.indexOf(s);
-        if (i !== -1) {
-            str = str.replace(s, "");
-        }
-    });
-    return str;
-}
-
-/**
- * @param {string} str
- * @param {Mojisyu} rejectMojisyu
- * @return {string}
- * @private
- */
-function patternReject(str, rejectMojisyu) {
-    rejectMojisyu.props.patterns.forEach(function (pattern) {
-        map.regexpMap(str, pattern[0], function (s) {
-            str = str.replace(s, "");
-        });
-    });
-    return str;
-}
-
-/***/ }),
-/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -424,15 +151,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var core = __webpack_require__(1);
-var defaultMojisyu = __webpack_require__(2);
-var Mojisyu = __webpack_require__(3);
+var core = __webpack_require__(5);
 
 /**
  * @type {Moji}
  */
-
-var Moji = function () {
+module.exports = function () {
     /**
      * @param {String} str
      * @param {Object} mojisyu
@@ -538,17 +262,301 @@ var Moji = function () {
     return Moji;
 }();
 
-var mojisyu = {};
-Object.keys(defaultMojisyu).forEach(function (m) {
-    mojisyu[m] = new Mojisyu(m, defaultMojisyu[m]);
-});
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var map = __webpack_require__(1);
+
+module.exports = function convert(str, fromMojisyu, toMojisyu) {
+    if (fromMojisyu.types.range && toMojisyu.types.range) {
+        str = rangeConvert(str, fromMojisyu, toMojisyu);
+    }
+    if (fromMojisyu.types.regexpList && toMojisyu.types.regexpList) {
+        str = regexpListConvert(str, fromMojisyu, toMojisyu);
+    }
+    if (fromMojisyu.types.patterns) {
+        str = patternConvert(str, fromMojisyu, toMojisyu);
+    }
+    return str;
+};
 
 /**
- * @param {String} str
+ * @param {string} str
+ * @param {Mojisyu} from
+ * @param {Mojisyu} to
+ * @return {string}
+ * @private
+ */
+function rangeConvert(str, from, to) {
+    var d = to.props.start - from.props.start;
+    return map.rangeMap(str, from.props.start, from.props.end, function (match, s, c) {
+        if (!match) {
+            return s;
+        }
+        return String.fromCharCode(c + d);
+    }).join("");
+}
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} from
+ * @param {Mojisyu} to
+ * @return {string}
+ * @private
+ */
+function regexpListConvert(str, from, to) {
+    return map.regexpMap(str, from.props.regexp, function (s) {
+        var i = from.props.list.indexOf(s);
+        if (i === -1) return s;
+        return to.props.list[i];
+    });
+}
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} from
+ * @param {Mojisyu} to
+ * @return {string}
+ * @private
+ */
+function patternConvert(str, from, to) {
+    return from.props.patterns.map(function (pattern) {
+        return map.regexpMap(str, pattern[0], function (s) {
+            return pattern[1][to.name];
+        });
+    }).join("");
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var map = __webpack_require__(1);
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} filterMojisyu フィルタする文字種名
  * @return {Moji}
  */
-module.exports = function (str) {
-    return new Moji(str, mojisyu);
+module.exports = function filter(str, filterMojisyu) {
+    if (filterMojisyu.types.range) {
+        str = rangeFilter(str, filterMojisyu);
+    }
+    if (filterMojisyu.types.regexpList) {
+        str = regexpListFilter(str, filterMojisyu);
+    }
+    if (filterMojisyu.types.patterns) {
+        str = patternFilter(str, filterMojisyu);
+    }
+    return str;
+};
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} filterMojisyu
+ * @return {string}
+ * @private
+ */
+function rangeFilter(str, filterMojisyu) {
+    return map.rangeMap(str, filterMojisyu.props.start, filterMojisyu.props.end, function (match, str, code) {
+        if (!match) {
+            return "";
+        }
+        return str;
+    }).join("");
+}
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} filterMojisyu
+ * @return {string}
+ * @private
+ */
+function regexpListFilter(str, filterMojisyu) {
+    var r = [];
+    map.regexpMap(str, filterMojisyu.props.regexp, function (s) {
+        var i = filterMojisyu.props.list.indexOf(s);
+        if (i !== -1) {
+            r.push(s);
+        }
+    });
+    return r.join("");
+}
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} filterMojisyu
+ * @return {string}
+ * @private
+ */
+function patternFilter(str, filterMojisyu) {
+    var r = [];
+    filterMojisyu.props.patterns.forEach(function (pattern) {
+        map.regexpMap(str, pattern[0], function (s) {
+            r.push(s);
+        });
+    });
+    return r.join("");
+}
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var convert = __webpack_require__(3);
+var filter = __webpack_require__(4);
+var reject = __webpack_require__(6);
+
+module.exports = {
+    convert: convert,
+    filter: filter,
+    reject: reject
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var map = __webpack_require__(1);
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} rejectMojisyu
+ * @return {string}
+ */
+module.exports = function reject(str, rejectMojisyu) {
+    if (rejectMojisyu.types.range) {
+        str = rangeReject(str, rejectMojisyu);
+    }
+    if (rejectMojisyu.types.regexpList) {
+        str = regexpListReject(str, rejectMojisyu);
+    }
+    if (rejectMojisyu.types.patterns) {
+        str = patternReject(str, rejectMojisyu);
+    }
+    return str;
+};
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} rejectMojisyu
+ * @return {string}
+ * @private
+ */
+function rangeReject(str, rejectMojisyu) {
+    return map.rangeMap(str, rejectMojisyu.props.start, rejectMojisyu.props.end, function (match, str, code) {
+        if (!match) {
+            return str;
+        }
+        return "";
+    }).join("");
+}
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} rejectMojisyu
+ * @return {string}
+ * @private
+ */
+function regexpListReject(str, rejectMojisyu) {
+    map.regexpMap(str, rejectMojisyu.props.regexp, function (s) {
+        var i = rejectMojisyu.props.list.indexOf(s);
+        if (i !== -1) {
+            str = str.replace(s, "");
+        }
+    });
+    return str;
+}
+
+/**
+ * @param {string} str
+ * @param {Mojisyu} rejectMojisyu
+ * @return {string}
+ * @private
+ */
+function patternReject(str, rejectMojisyu) {
+    rejectMojisyu.props.patterns.forEach(function (pattern) {
+        map.regexpMap(str, pattern[0], function (s) {
+            str = str.replace(s, "");
+        });
+    });
+    return str;
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+    'ZE': { start: 0xff01, end: 0xff5e }, // 全角英数
+    'HE': { start: 0x0021, end: 0x007e }, // 半角英数
+    'HG': { start: 0x3041, end: 0x3096 }, // ひらがな
+    'KK': { start: 0x30a1, end: 0x30f6 }, // カタカナ
+
+    'HS': { patterns: [[/(\s|\u00A0)/g, { "ZS": "　" }]] }, // 半角スペース
+    'ZS': { patterns: [[/(\u3000)/g, { "HS": " " }]] }, //全角スペース
+
+    'HK': { regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g, // 半角カナ
+        list: ['｡', '｢', '｣', '､', '･', 'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｰ', 'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ', 'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ', 'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ', 'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ', 'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ', 'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ', 'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ', 'ﾔ', 'ﾕ', 'ﾖ', 'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ', 'ﾜ', 'ﾝ', 'ﾞ', 'ﾟ', 'ｦﾞ', 'ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ', 'ﾊﾞ', 'ﾊﾟ', 'ﾋﾞ', 'ﾋﾟ', 'ﾌﾞ', 'ﾌﾟ', 'ﾍﾞ', 'ﾍﾟ', 'ﾎﾞ', 'ﾎﾟ', 'ﾜﾞ'] },
+    'ZK': { regexp: /([\u30a1-\u30f6])/g, //全角カナ (半角カナ変換用)
+        list: ['。', '「', '」', '、', '・', 'ヲ', 'ァ', 'ィ', 'ゥ', 'ェ', 'ォ', 'ャ', 'ュ', 'ョ', 'ッ', 'ー', 'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム', 'メ', 'モ', 'ヤ', 'ユ', 'ヨ', 'ラ', 'リ', 'ル', 'レ', 'ロ', 'ワ', 'ン', '゛', '゜', 'ヺ', 'ヴ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド', 'バ', 'パ', 'ビ', 'ピ', 'ブ', 'プ', 'ベ', 'ペ', 'ボ', 'ポ', 'ヷ'] }
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * @param {Object} mObj
+ * @return {Object}
+ */
+function types(mObj) {
+    var o = {};
+    o.range = mObj.start && mObj.end ? true : false;
+    o.regexpList = mObj.regexp && mObj.list ? true : false;
+    o.patterns = mObj.patterns ? true : false;
+    return o;
+}
+
+/**
+ * @type {Mojisyu}
+ */
+module.exports =
+/**
+ * @param {String} name
+ * @param {Object} mObj
+ */
+function Mojisyu(name, mObj) {
+    _classCallCheck(this, Mojisyu);
+
+    this.name = name;
+    this.types = types(mObj);
+    this.props = {};
+
+    _extends(this.props, mObj);
 };
 
 /***/ })

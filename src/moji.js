@@ -1,11 +1,9 @@
 const core = require("./core");
-const defaultMojisyu = require("./default_mojisyu");
-const Mojisyu = require("./mojisyu");
 
 /**
  * @type {Moji}
  */
-class Moji {
+module.exports = class Moji {
     /**
      * @param {String} str
      * @param {Object} mojisyu
@@ -79,17 +77,4 @@ class Moji {
         this._str = String.prototype[method].call(this._str, ...args);
         return this;
     }
-}
-
-let mojisyu = {};
-Object.keys(defaultMojisyu).forEach((m) => {
-    mojisyu[m] = new Mojisyu(m, defaultMojisyu[m]);
-});
-
-/**
- * @param {String} str
- * @return {Moji}
- */
-module.exports = (str) => {
-    return new Moji(str, mojisyu);
 };
