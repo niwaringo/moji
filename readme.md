@@ -12,24 +12,28 @@ githubはversion1になっていますが、npmはver0.5系のままですので
 
 ### ブラウザ
 
-[ダウンロード](https://raw.githubusercontent.com/niwaringo/moji/master/dist/moji.js)
+[ダウンロード](https://github.com/niwaringo/moji/releases/download/V1.2.0/moji.js)
 
 ```javascript
-<script src="/path/to/script/moji.standalone.js"></script>
+<script src="/path/to/script/moji.js"></script>
 <script>
-$('hoge input')
-  .val(new Moji($('hoge input').val()).convert('ZE', 'HE').toString());
+$("hoge input")
+  .val(new Moji($("hoge input").val()).convert("ZE", "HE").toString());
 </script>
 ```
 
 ### npm & require
 
-```javascript
+```bash
+//npm
 npm i moji
+
+// yarn
+yarn add moji
 ```
 
 ```javascript
-var moji = require('moji');
+const moji = require("moji");
 ```
 
 使い方
@@ -37,51 +41,71 @@ var moji = require('moji');
 
 ###convert()
 
-`convert('変換元文字種', '変換先文字種')`
+`convert("変換種別)`
+
+* "ZEtoHE": 全角英数 => 半角英数
+* "ZStoHS": 全角スペース => 半角スペース
+* "HStoZS": 半角スペース => 全角スペースに
+* "HEtoZE": 半角英数 => 全角英数
+* "HGtoKK": ひらがな => カタカナ
+* "KKtoHG": カタカナ => ひらがな
+* "ZKtoHK": 全角カナ => 半角カナ
+* "HKtoZK": 半角カナ => 全角カナ
 
 ```javascript
-/** 全角英数 → 半角英数 **/
-moji('ＡＢＣＤ０１２３４').convert('ZE', 'HE').toString();
-// -> ABCD01234
+/** 全角英数 => 半角英数 **/
+moji("ＡＢＣＤ０１２３４").convert("ZEtoHE").toString();
+// => ABCD01234
 
-/** 半角英数 → 全角英数 **/
-moji('ABCD01234').convert('HE', 'ZE').toString();
-// -> ＡＢＣＤ０１２３４
+/** 半角英数 => 全角英数 **/
+moji("ABCD01234").convert("HEtoZE").toString();
+// => ＡＢＣＤ０１２３４
 
-/** 全角スペース → 全角スペース **/
-moji('　').convert('ZS', 'HS').toString();
-// -> ' '
+/** 全角スペース => 全角スペース **/
+moji("　").convert("ZStoHS").toString();
+// => " "
 
-/** ひらがな → カタカナ **/
-moji('あいうえお').convert('HG', 'KK').toString();
-// -> アイウエオ
+/** ひらがな => カタカナ **/
+moji("あいうえお").convert("HGtoKK").toString();
+// => アイウエオ
 
-/** カタカナ → ひらがな **/
-moji('アイウエオ').convert('KK', 'HG').toString();
-// -> あいうえお
+/** カタカナ => ひらがな **/
+moji("アイウエオ").convert("KKtoHG").toString();
+// => あいうえお
 
-/** 全角カナ → 半角カナ **/
-moji('アイウエオ').convert('ZK', 'HK').toString();
-// -> ｱｲｳｴｵ
+/** 全角カナ => 半角カナ **/
+moji("アイウエオ").convert("ZKtoHK").toString();
+// => ｱｲｳｴｵ
 
-/** 半角カナ → 全角カナ **/
-moji('ｱｲｳｴｵ').convert('HK', 'ZK').toString(),
-// -> アイウエオ
+/** 半角カナ => 全角カナ **/
+moji("ｱｲｳｴｵ").convert("HKtoZK").toString(),
+// => アイウエオ
 ```
 
-メソッドチェーンで繋いで変換
+メソッドチェーンでつないで変換
 
 ```javascript
-/** [半角カナ] → [全角カナ] → [ひらがな] **/
-moji('ｱｲｳｴｵ').convert('HK', 'ZK').convert('KK', 'HG').toString();
-// -> あいうえお
+/** [半角カナ] => [全角カナ] => [ひらがな] **/
+moji("ｱｲｳｴｵ").convert("HKtoZK").convert("KKtoHG").toString();
+// => あいうえお
 ```
 
 ---
 
-### trim()
+### 標準のStringメソッド
 
-`trim()`\`
+`string("標準メソッド名", [標準メソッド引数)`
+
+```javascript
+moji("　あ　あ　あ　").string("trim").convert("HG", "KK").toString(),
+// => "ア　ア　ア"
+
+moji("あああ").string("replace", "あああ", "いいい").convert("HG", "KK").toString(),
+// => イイイ
+
+moji("abcdefghij").string("substr", 1, 2).toString(),
+// => bc
+```
 
 ---
 
@@ -89,7 +113,7 @@ moji('ｱｲｳｴｵ').convert('HK', 'ZK').convert('KK', 'HG').toString();
 
 `toString()`
 
-基本的にメソッドはメソッドチェーンでつなぐ事を想定しているため、文字列の取得は最後に`toString`で文字列に変換してください。
+基本的にメソッドはメソッドチェーンでつなぐ事を想定しているため、最後に`toString`で文字列を取得してください。
 
 ---
 
@@ -97,24 +121,24 @@ moji('ｱｲｳｴｵ').convert('HK', 'ZK').convert('KK', 'HG').toString();
 
 指定した文字種で絞込ます。
 
-`filter('絞り込みたい文字種')`
+`filter("絞り込みたい文字種")`
 
 ```javascript
 /** ひらがなを絞込 **/
-moji('abcあいうアイウ123').filter('HG').toString();
-// -> あいう
+moji("abcあいうアイウ123").filter("HG").toString();
+// => あいう
 ```
 
 ### reject()
 
 指定した文字種を排除します。
 
-`reject('排除したい文字種')`
+`reject("排除したい文字種")`
 
 ```javascript
 /** ひらがなを排除 **/
-moji('abcあいうアイウ123').reject('HG').toString();
-// -> abcアイウ123
+moji("abcあいうアイウ123").reject("HG").toString();
+// => abcアイウ123
 ```
 
 ---
@@ -144,15 +168,15 @@ moji('abcあいうアイウ123').reject('HG').toString();
 追加例)
 
 ```javascript
-moji.addMojisyu('文字種名', {start: 開始文字コード, end: 終了文字コード});
-moji.addMojisyu('文字種名', {regxp: 正規表現, list: 文字列の配列});
+moji.addMojisyu("文字種名", {start: 開始文字コード, end: 終了文字コード});
+moji.addMojisyu("文字種名", {regxp: 正規表現, list: 文字列の配列});
 ```
 
 例)
 ```javascript
-moji = require('Moji');
-moji.addMojisyu({'ZE', {start:0xff01, end:0xff5e}}); // 全角英数
-moji.addMojisyu({'HK', {
+moji = require("Moji");
+moji.addMojisyu({"ZE", {start:0xff01, end:0xff5e}}); // 全角英数
+moji.addMojisyu({"HK", {
   regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g,
   list: ["｡", "｢", "｣"]
 }});
@@ -178,7 +202,7 @@ moji.addMojisyu({'HK', {
 感謝
 ----
 
-FHconverterを多く参考させて頂いています。
+[FHconverter.js](http://distraid.co.jp/demo/js_codeconv.html)を多く参考させて頂いています。
 
 ライセンス
 ----------
