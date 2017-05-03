@@ -13,59 +13,116 @@ describe("moji.cores", () => {
         );
     });
 
-    it("全角英数から半角英数", () => {
+    it("全角英数から半角英数 arg2", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZE", "HE").toString(),
             "ABCD　01234あいうアイウABCD 01234ｱｲｳ");
     });
 
-    it("全角スペースを半角スペースに", () => {
+    it("全角英数から半角英数 arg1", () => {
+        assert.strictEqual(
+            moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZEtoHE").toString(),
+            "ABCD　01234あいうアイウABCD 01234ｱｲｳ");
+    });
+
+    it("全角スペースを半角スペースに arg2", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZS", "HS").toString(),
             "ＡＢＣＤ ０１２３４あいうアイウABCD 01234ｱｲｳ");
     });
 
-    it("半角スペースを全角スペースに", () => {
+    it("全角スペースを半角スペースに arg1", () => {
+        assert.strictEqual(
+            moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZStoHS").toString(),
+            "ＡＢＣＤ ０１２３４あいうアイウABCD 01234ｱｲｳ");
+    });
+
+    it("半角スペースを全角スペースに arm2", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HS", "ZS").toString(),
             "ＡＢＣＤ　０１２３４あいうアイウABCD　01234ｱｲｳ");
     });
 
-    it("半角英数から全角英数", () => {
+    it("半角スペースを全角スペースに arm1", () => {
+        assert.strictEqual(
+            moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HStoZS").toString(),
+            "ＡＢＣＤ　０１２３４あいうアイウABCD　01234ｱｲｳ");
+    });
+
+    it("半角英数から全角英数 arg2", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HE", "ZE").toString(),
             "ＡＢＣＤ　０１２３４あいうアイウＡＢＣＤ ０１２３４ｱｲｳ");
     });
 
-    it("ひらがなからカタカナ", () => {
+    it("半角英数から全角英数 arg1", () => {
+        assert.strictEqual(
+            moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HEtoZE").toString(),
+            "ＡＢＣＤ　０１２３４あいうアイウＡＢＣＤ ０１２３４ｱｲｳ");
+    });
+
+    it("ひらがなからカタカナ arg2", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HG", "KK").toString(),
             "ＡＢＣＤ　０１２３４アイウアイウABCD 01234ｱｲｳ");
     });
 
-    it("カタカナからひらがな", () => {
+    it("ひらがなからカタカナ arg1", () => {
+        assert.strictEqual(
+            moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HGtoKK").toString(),
+            "ＡＢＣＤ　０１２３４アイウアイウABCD 01234ｱｲｳ");
+    });
+
+    it("カタカナからひらがな arg2", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("KK", "HG").toString(),
             "ＡＢＣＤ　０１２３４あいうあいうABCD 01234ｱｲｳ");
     });
 
-    it("全角カナから半角カナ", () => {
+    it("カタカナからひらがな arg1", () => {
+        assert.strictEqual(
+            moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("KKtoHG").toString(),
+            "ＡＢＣＤ　０１２３４あいうあいうABCD 01234ｱｲｳ");
+    });
+
+    it("全角カナから半角カナ arg2", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZK", "HK").toString(),
             "ＡＢＣＤ　０１２３４あいうｱｲｳABCD 01234ｱｲｳ");
     });
 
-    it("半角カナから全角カナ", () => {
+    it("全角カナから半角カナ arg1", () => {
+        assert.strictEqual(
+            moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZKtoHK").toString(),
+            "ＡＢＣＤ　０１２３４あいうｱｲｳABCD 01234ｱｲｳ");
+    });
+
+    it("半角カナから全角カナ arg2", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HK", "ZK").toString(),
             "ＡＢＣＤ　０１２３４あいうアイウABCD 01234アイウ");
     });
 
-    it("複数の文字種を置換", () => {
+    it("半角カナから全角カナ arg1", () => {
+        assert.strictEqual(
+            moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HKtoZK").toString(),
+            "ＡＢＣＤ　０１２３４あいうアイウABCD 01234アイウ");
+    });
+
+    it("複数の文字種を置換 arg2", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ")
                 .convert("HK", "ZK")
                 .convert("KK", "HG")
+                .toString(),
+            "ＡＢＣＤ　０１２３４あいうあいうABCD 01234あいう");
+    });
+
+    it("複数の文字種を置換 arg1", () => {
+        assert.strictEqual(
+            moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ")
+                .convert("HKtoZK")
+                .convert("KKtoHG")
                 .toString(),
             "ＡＢＣＤ　０１２３４あいうあいうABCD 01234あいう");
     });

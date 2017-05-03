@@ -1043,6 +1043,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var core = __webpack_require__(1);
             var defaultMojisyu = __webpack_require__(2);
             var Mojisyu = __webpack_require__(3);
+
             /**
              * @type {Moji}
              */
@@ -1069,6 +1070,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 _createClass(Moji, [{
                     key: "convert",
                     value: function convert(fromName, toName) {
+                        if (!toName) {
+                            var m = fromName.split("to");
+                            return this.convert(m[0], m[1]);
+                        }
+
                         var from = this._mojisyu[fromName];
                         var to = this._mojisyu[toName];
                         this._str = core.convert(this._str, from, to);
@@ -1212,40 +1218,76 @@ describe("moji.cores", function () {
         assert.strictEqual(moji("ABC").toCharCode(), "65|66|67");
     });
 
-    it("全角英数から半角英数", function () {
+    it("全角英数から半角英数 arg2", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZE", "HE").toString(), "ABCD　01234あいうアイウABCD 01234ｱｲｳ");
     });
 
-    it("全角スペースを半角スペースに", function () {
+    it("全角英数から半角英数 arg1", function () {
+        assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZEtoHE").toString(), "ABCD　01234あいうアイウABCD 01234ｱｲｳ");
+    });
+
+    it("全角スペースを半角スペースに arg2", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZS", "HS").toString(), "ＡＢＣＤ ０１２３４あいうアイウABCD 01234ｱｲｳ");
     });
 
-    it("半角スペースを全角スペースに", function () {
+    it("全角スペースを半角スペースに arg1", function () {
+        assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZStoHS").toString(), "ＡＢＣＤ ０１２３４あいうアイウABCD 01234ｱｲｳ");
+    });
+
+    it("半角スペースを全角スペースに arm2", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HS", "ZS").toString(), "ＡＢＣＤ　０１２３４あいうアイウABCD　01234ｱｲｳ");
     });
 
-    it("半角英数から全角英数", function () {
+    it("半角スペースを全角スペースに arm1", function () {
+        assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HStoZS").toString(), "ＡＢＣＤ　０１２３４あいうアイウABCD　01234ｱｲｳ");
+    });
+
+    it("半角英数から全角英数 arg2", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HE", "ZE").toString(), "ＡＢＣＤ　０１２３４あいうアイウＡＢＣＤ ０１２３４ｱｲｳ");
     });
 
-    it("ひらがなからカタカナ", function () {
+    it("半角英数から全角英数 arg1", function () {
+        assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HEtoZE").toString(), "ＡＢＣＤ　０１２３４あいうアイウＡＢＣＤ ０１２３４ｱｲｳ");
+    });
+
+    it("ひらがなからカタカナ arg2", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HG", "KK").toString(), "ＡＢＣＤ　０１２３４アイウアイウABCD 01234ｱｲｳ");
     });
 
-    it("カタカナからひらがな", function () {
+    it("ひらがなからカタカナ arg1", function () {
+        assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HGtoKK").toString(), "ＡＢＣＤ　０１２３４アイウアイウABCD 01234ｱｲｳ");
+    });
+
+    it("カタカナからひらがな arg2", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("KK", "HG").toString(), "ＡＢＣＤ　０１２３４あいうあいうABCD 01234ｱｲｳ");
     });
 
-    it("全角カナから半角カナ", function () {
+    it("カタカナからひらがな arg1", function () {
+        assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("KKtoHG").toString(), "ＡＢＣＤ　０１２３４あいうあいうABCD 01234ｱｲｳ");
+    });
+
+    it("全角カナから半角カナ arg2", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZK", "HK").toString(), "ＡＢＣＤ　０１２３４あいうｱｲｳABCD 01234ｱｲｳ");
     });
 
-    it("半角カナから全角カナ", function () {
+    it("全角カナから半角カナ arg1", function () {
+        assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("ZKtoHK").toString(), "ＡＢＣＤ　０１２３４あいうｱｲｳABCD 01234ｱｲｳ");
+    });
+
+    it("半角カナから全角カナ arg2", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HK", "ZK").toString(), "ＡＢＣＤ　０１２３４あいうアイウABCD 01234アイウ");
     });
 
-    it("複数の文字種を置換", function () {
+    it("半角カナから全角カナ arg1", function () {
+        assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HKtoZK").toString(), "ＡＢＣＤ　０１２３４あいうアイウABCD 01234アイウ");
+    });
+
+    it("複数の文字種を置換 arg2", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HK", "ZK").convert("KK", "HG").toString(), "ＡＢＣＤ　０１２３４あいうあいうABCD 01234あいう");
+    });
+
+    it("複数の文字種を置換 arg1", function () {
+        assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").convert("HKtoZK").convert("KKtoHG").toString(), "ＡＢＣＤ　０１２３４あいうあいうABCD 01234あいう");
     });
 
     it("filter range", function () {
@@ -1311,11 +1353,11 @@ describe("moji.str", function () {
 /* globals describe, it */
 var assert = __webpack_require__(0);
 var Mojisyu = __webpack_require__(7);
-var defalutMojisyu = __webpack_require__(6);
+var defaultMojisyu = __webpack_require__(6);
 
 describe("Mojisyu", function () {
-    var mZE = new Mojisyu("ZE", defalutMojisyu.ZE);
-    var mHS = new Mojisyu("HS", defalutMojisyu.HS);
+    var mZE = new Mojisyu("ZE", defaultMojisyu.ZE);
+    var mHS = new Mojisyu("HS", defaultMojisyu.HS);
 
     it("range type", function () {
         assert.ok(mZE.types.range, "range");

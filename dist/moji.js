@@ -427,6 +427,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var core = __webpack_require__(1);
 var defaultMojisyu = __webpack_require__(2);
 var Mojisyu = __webpack_require__(3);
+
 /**
  * @type {Moji}
  */
@@ -454,6 +455,11 @@ var Moji = function () {
     _createClass(Moji, [{
         key: "convert",
         value: function convert(fromName, toName) {
+            if (!toName) {
+                var m = fromName.split("to");
+                return this.convert(m[0], m[1]);
+            }
+
             var from = this._mojisyu[fromName];
             var to = this._mojisyu[toName];
             this._str = core.convert(this._str, from, to);

@@ -1,6 +1,7 @@
 const core = require("./core");
 const defaultMojisyu = require("./default_mojisyu");
 const Mojisyu = require("./mojisyu");
+
 /**
  * @type {Moji}
  */
@@ -21,6 +22,11 @@ class Moji {
      * @return {Moji}
      */
     convert(fromName, toName) {
+        if (!toName) {
+            const m = fromName.split("to");
+            return this.convert(m[0], m[1]);
+        }
+
         const from = this._mojisyu[fromName];
         const to = this._mojisyu[toName];
         this._str = core.convert(this._str, from, to);
