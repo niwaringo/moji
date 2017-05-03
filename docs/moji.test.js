@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -139,7 +139,7 @@ function isBuffer(b) {
 // ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var util = __webpack_require__(14);
+var util = __webpack_require__(11);
 var hasOwn = Object.prototype.hasOwnProperty;
 var pSlice = Array.prototype.slice;
 var functionsHaveNames = (function () {
@@ -562,73 +562,10 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * @param {Object} mObj
- * @return {Object}
- */
-function types(mObj) {
-    var o = {};
-    o.range = mObj.start && mObj.end ? true : false;
-    o.regexpList = mObj.regexp && mObj.list ? true : false;
-    o.patterns = mObj.patterns ? true : false;
-    return o;
-}
-
-/**
- * @type {Mojisyu}
- */
-module.exports =
-/**
- * @param {String} name
- * @param {Object} mObj
- */
-function Mojisyu(name, mObj) {
-    _classCallCheck(this, Mojisyu);
-
-    this.name = name;
-    this.types = types(mObj);
-    this.props = {};
-
-    _extends(this.props, mObj);
-};
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-    'ZE': { start: 0xff01, end: 0xff5e }, // 全角英数
-    'HE': { start: 0x0021, end: 0x007e }, // 半角英数
-    'HG': { start: 0x3041, end: 0x3096 }, // ひらがな
-    'KK': { start: 0x30a1, end: 0x30f6 }, // カタカナ
-
-    'HS': { patterns: [[/(\s|\u00A0)/g, { "ZS": "　" }]] }, // 半角スペース
-    'ZS': { patterns: [[/(\u3000)/g, { "HS": " " }]] }, //全角スペース
-
-    'HK': { regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g, // 半角カナ
-        list: ['｡', '｢', '｣', '､', '･', 'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｰ', 'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ', 'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ', 'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ', 'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ', 'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ', 'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ', 'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ', 'ﾔ', 'ﾕ', 'ﾖ', 'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ', 'ﾜ', 'ﾝ', 'ﾞ', 'ﾟ', 'ｦﾞ', 'ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ', 'ﾊﾞ', 'ﾊﾟ', 'ﾋﾞ', 'ﾋﾟ', 'ﾌﾞ', 'ﾌﾟ', 'ﾍﾞ', 'ﾍﾟ', 'ﾎﾞ', 'ﾎﾟ', 'ﾜﾞ'] },
-    'ZK': { regexp: /([\u30a1-\u30f6])/g, //全角カナ (半角カナ変換用)
-        list: ['。', '「', '」', '、', '・', 'ヲ', 'ァ', 'ィ', 'ゥ', 'ェ', 'ォ', 'ャ', 'ュ', 'ョ', 'ッ', 'ー', 'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム', 'メ', 'モ', 'ヤ', 'ユ', 'ヨ', 'ラ', 'リ', 'ル', 'レ', 'ロ', 'ワ', 'ン', '゛', '゜', 'ヺ', 'ヴ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド', 'バ', 'パ', 'ビ', 'ピ', 'ブ', 'プ', 'ベ', 'ペ', 'ボ', 'ポ', 'ヷ'] }
-};
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -721,36 +658,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /******/__webpack_require__.p = "";
             /******/
             /******/ // Load entry module and return exports
-            /******/return __webpack_require__(__webpack_require__.s = 0);
+            /******/return __webpack_require__(__webpack_require__.s = 8);
             /******/
         }(
         /************************************************************************/
         /******/[
         /* 0 */
-        /***/function (module, exports, __webpack_require__) {
-
-            "use strict";
-
-            var Moji = __webpack_require__(2);
-            var defaultMojisyu = __webpack_require__(7);
-            var Mojisyu = __webpack_require__(8);
-
-            var mojisyu = {};
-            Object.keys(defaultMojisyu).forEach(function (m) {
-                mojisyu[m] = new Mojisyu(m, defaultMojisyu[m]);
-            });
-
-            /**
-             * @param {String} str
-             * @return {Moji}
-             */
-            module.exports = function (str) {
-                return new Moji(str, mojisyu);
-            };
-
-            /***/
-        },
-        /* 1 */
         /***/function (module, exports, __webpack_require__) {
 
             "use strict";
@@ -787,6 +700,28 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             /***/
         },
+        /* 1 */
+        /***/function (module, exports, __webpack_require__) {
+
+            "use strict";
+
+            module.exports = {
+                'ZE': { start: 0xff01, end: 0xff5e }, // 全角英数
+                'HE': { start: 0x0021, end: 0x007e }, // 半角英数
+                'HG': { start: 0x3041, end: 0x3096 }, // ひらがな
+                'KK': { start: 0x30a1, end: 0x30f6 }, // カタカナ
+
+                'HS': { patterns: [[/(\s|\u00A0)/g, { "ZS": "　" }]] }, // 半角スペース
+                'ZS': { patterns: [[/(\u3000)/g, { "HS": " " }]] }, //全角スペース
+
+                'HK': { regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g, // 半角カナ
+                    list: ['｡', '｢', '｣', '､', '･', 'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｰ', 'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ', 'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ', 'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ', 'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ', 'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ', 'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ', 'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ', 'ﾔ', 'ﾕ', 'ﾖ', 'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ', 'ﾜ', 'ﾝ', 'ﾞ', 'ﾟ', 'ｦﾞ', 'ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ', 'ﾊﾞ', 'ﾊﾟ', 'ﾋﾞ', 'ﾋﾟ', 'ﾌﾞ', 'ﾌﾟ', 'ﾍﾞ', 'ﾍﾟ', 'ﾎﾞ', 'ﾎﾟ', 'ﾜﾞ'] },
+                'ZK': { regexp: /([\u30a1-\u30f6])/g, //全角カナ (半角カナ変換用)
+                    list: ['。', '「', '」', '、', '・', 'ヲ', 'ァ', 'ィ', 'ゥ', 'ェ', 'ォ', 'ャ', 'ュ', 'ョ', 'ッ', 'ー', 'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム', 'メ', 'モ', 'ヤ', 'ユ', 'ヨ', 'ラ', 'リ', 'ル', 'レ', 'ロ', 'ワ', 'ン', '゛', '゜', 'ヺ', 'ヴ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド', 'バ', 'パ', 'ビ', 'ピ', 'ブ', 'プ', 'ベ', 'ペ', 'ボ', 'ポ', 'ヷ'] }
+            };
+
+            /***/
+        },
         /* 2 */
         /***/function (module, exports, __webpack_require__) {
 
@@ -818,7 +753,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 }
             }
 
-            var core = __webpack_require__(5);
+            var core = __webpack_require__(6);
 
             /**
              * @type {Moji}
@@ -935,7 +870,60 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             "use strict";
 
-            var map = __webpack_require__(1);
+            var _extends = Object.assign || function (target) {
+                for (var i = 1; i < arguments.length; i++) {
+                    var source = arguments[i];for (var key in source) {
+                        if (Object.prototype.hasOwnProperty.call(source, key)) {
+                            target[key] = source[key];
+                        }
+                    }
+                }return target;
+            };
+
+            function _classCallCheck(instance, Constructor) {
+                if (!(instance instanceof Constructor)) {
+                    throw new TypeError("Cannot call a class as a function");
+                }
+            }
+
+            /**
+             * @param {Object} mObj
+             * @return {Object}
+             */
+            function types(mObj) {
+                var o = {};
+                o.range = mObj.start && mObj.end ? true : false;
+                o.regexpList = mObj.regexp && mObj.list ? true : false;
+                o.patterns = mObj.patterns ? true : false;
+                return o;
+            }
+
+            /**
+             * @type {Mojisyu}
+             */
+            module.exports =
+            /**
+             * @param {String} name
+             * @param {Object} mObj
+             */
+            function Mojisyu(name, mObj) {
+                _classCallCheck(this, Mojisyu);
+
+                this.name = name;
+                this.types = types(mObj);
+                this.props = {};
+
+                _extends(this.props, mObj);
+            };
+
+            /***/
+        },
+        /* 4 */
+        /***/function (module, exports, __webpack_require__) {
+
+            "use strict";
+
+            var map = __webpack_require__(0);
 
             module.exports = function convert(str, fromMojisyu, toMojisyu) {
                 if (fromMojisyu.types.range && toMojisyu.types.range) {
@@ -999,12 +987,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             /***/
         },
-        /* 4 */
+        /* 5 */
         /***/function (module, exports, __webpack_require__) {
 
             "use strict";
 
-            var map = __webpack_require__(1);
+            var map = __webpack_require__(0);
 
             /**
              * @param {string} str
@@ -1074,14 +1062,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             /***/
         },
-        /* 5 */
+        /* 6 */
         /***/function (module, exports, __webpack_require__) {
 
             "use strict";
 
-            var convert = __webpack_require__(3);
-            var filter = __webpack_require__(4);
-            var reject = __webpack_require__(6);
+            var convert = __webpack_require__(4);
+            var filter = __webpack_require__(5);
+            var reject = __webpack_require__(7);
 
             module.exports = {
                 convert: convert,
@@ -1091,12 +1079,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             /***/
         },
-        /* 6 */
+        /* 7 */
         /***/function (module, exports, __webpack_require__) {
 
             "use strict";
 
-            var map = __webpack_require__(1);
+            var map = __webpack_require__(0);
 
             /**
              * @param {string} str
@@ -1164,87 +1152,36 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             /***/
         },
-        /* 7 */
-        /***/function (module, exports, __webpack_require__) {
-
-            "use strict";
-
-            module.exports = {
-                'ZE': { start: 0xff01, end: 0xff5e }, // 全角英数
-                'HE': { start: 0x0021, end: 0x007e }, // 半角英数
-                'HG': { start: 0x3041, end: 0x3096 }, // ひらがな
-                'KK': { start: 0x30a1, end: 0x30f6 }, // カタカナ
-
-                'HS': { patterns: [[/(\s|\u00A0)/g, { "ZS": "　" }]] }, // 半角スペース
-                'ZS': { patterns: [[/(\u3000)/g, { "HS": " " }]] }, //全角スペース
-
-                'HK': { regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g, // 半角カナ
-                    list: ['｡', '｢', '｣', '､', '･', 'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｰ', 'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ', 'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ', 'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ', 'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ', 'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ', 'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ', 'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ', 'ﾔ', 'ﾕ', 'ﾖ', 'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ', 'ﾜ', 'ﾝ', 'ﾞ', 'ﾟ', 'ｦﾞ', 'ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ', 'ﾊﾞ', 'ﾊﾟ', 'ﾋﾞ', 'ﾋﾟ', 'ﾌﾞ', 'ﾌﾟ', 'ﾍﾞ', 'ﾍﾟ', 'ﾎﾞ', 'ﾎﾟ', 'ﾜﾞ'] },
-                'ZK': { regexp: /([\u30a1-\u30f6])/g, //全角カナ (半角カナ変換用)
-                    list: ['。', '「', '」', '、', '・', 'ヲ', 'ァ', 'ィ', 'ゥ', 'ェ', 'ォ', 'ャ', 'ュ', 'ョ', 'ッ', 'ー', 'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム', 'メ', 'モ', 'ヤ', 'ユ', 'ヨ', 'ラ', 'リ', 'ル', 'レ', 'ロ', 'ワ', 'ン', '゛', '゜', 'ヺ', 'ヴ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド', 'バ', 'パ', 'ビ', 'ピ', 'ブ', 'プ', 'ベ', 'ペ', 'ボ', 'ポ', 'ヷ'] }
-            };
-
-            /***/
-        },
         /* 8 */
         /***/function (module, exports, __webpack_require__) {
 
             "use strict";
 
-            var _extends = Object.assign || function (target) {
-                for (var i = 1; i < arguments.length; i++) {
-                    var source = arguments[i];for (var key in source) {
-                        if (Object.prototype.hasOwnProperty.call(source, key)) {
-                            target[key] = source[key];
-                        }
-                    }
-                }return target;
-            };
+            var Moji = __webpack_require__(2);
+            var defaultMojisyu = __webpack_require__(1);
+            var Mojisyu = __webpack_require__(3);
 
-            function _classCallCheck(instance, Constructor) {
-                if (!(instance instanceof Constructor)) {
-                    throw new TypeError("Cannot call a class as a function");
-                }
-            }
+            var mojisyu = {};
+            Object.keys(defaultMojisyu).forEach(function (m) {
+                mojisyu[m] = new Mojisyu(m, defaultMojisyu[m]);
+            });
 
             /**
-             * @param {Object} mObj
-             * @return {Object}
+             * @param {String} str
+             * @return {Moji}
              */
-            function types(mObj) {
-                var o = {};
-                o.range = mObj.start && mObj.end ? true : false;
-                o.regexpList = mObj.regexp && mObj.list ? true : false;
-                o.patterns = mObj.patterns ? true : false;
-                return o;
-            }
-
-            /**
-             * @type {Mojisyu}
-             */
-            module.exports =
-            /**
-             * @param {String} name
-             * @param {Object} mObj
-             */
-            function Mojisyu(name, mObj) {
-                _classCallCheck(this, Mojisyu);
-
-                this.name = name;
-                this.types = types(mObj);
-                this.props = {};
-
-                _extends(this.props, mObj);
+            module.exports = function (str) {
+                return new Moji(str, mojisyu);
             };
 
             /***/
         }])
     );
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module)))
 
 /***/ }),
-/* 4 */
+/* 2 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1271,14 +1208,14 @@ module.exports = g;
 
 
 /***/ }),
-/* 5 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var assert = __webpack_require__(0);
-var moji = __webpack_require__(3);
+var moji = __webpack_require__(1);
 
 if (typeof window !== "undefined") {
     moji = window.moji;
@@ -1387,14 +1324,14 @@ describe("moji.cores", function () {
 });
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var assert = __webpack_require__(0);
-var moji = __webpack_require__(3);
+var moji = __webpack_require__(1);
 
 if (typeof window !== "undefined") {
     moji = window.moji;
@@ -1415,7 +1352,7 @@ describe("moji.str", function () {
 });
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1423,8 +1360,8 @@ describe("moji.str", function () {
 
 /* globals describe, it */
 var assert = __webpack_require__(0);
-var Mojisyu = __webpack_require__(1);
-var defaultMojisyu = __webpack_require__(2);
+var Mojisyu = __webpack_require__(7);
+var defaultMojisyu = __webpack_require__(6);
 
 describe("Mojisyu", function () {
     var mZE = new Mojisyu("ZE", defaultMojisyu.ZE);
@@ -1448,16 +1385,70 @@ describe("Mojisyu", function () {
 });
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports) {
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'C:\\Users\\murao\\Documents\\dev\\github\\moji\\test\\pairmojisyu.test.js'\n    at Error (native)");
+
+
+module.exports = {
+    'ZE': { start: 0xff01, end: 0xff5e }, // 全角英数
+    'HE': { start: 0x0021, end: 0x007e }, // 半角英数
+    'HG': { start: 0x3041, end: 0x3096 }, // ひらがな
+    'KK': { start: 0x30a1, end: 0x30f6 }, // カタカナ
+
+    'HS': { patterns: [[/(\s|\u00A0)/g, { "ZS": "　" }]] }, // 半角スペース
+    'ZS': { patterns: [[/(\u3000)/g, { "HS": " " }]] }, //全角スペース
+
+    'HK': { regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g, // 半角カナ
+        list: ['｡', '｢', '｣', '､', '･', 'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｰ', 'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ', 'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ', 'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ', 'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ', 'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ', 'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ', 'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ', 'ﾔ', 'ﾕ', 'ﾖ', 'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ', 'ﾜ', 'ﾝ', 'ﾞ', 'ﾟ', 'ｦﾞ', 'ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ', 'ﾊﾞ', 'ﾊﾟ', 'ﾋﾞ', 'ﾋﾟ', 'ﾌﾞ', 'ﾌﾟ', 'ﾍﾞ', 'ﾍﾟ', 'ﾎﾞ', 'ﾎﾟ', 'ﾜﾞ'] },
+    'ZK': { regexp: /([\u30a1-\u30f6])/g, //全角カナ (半角カナ変換用)
+        list: ['。', '「', '」', '、', '・', 'ヲ', 'ァ', 'ィ', 'ゥ', 'ェ', 'ォ', 'ャ', 'ュ', 'ョ', 'ッ', 'ー', 'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム', 'メ', 'モ', 'ヤ', 'ユ', 'ヨ', 'ラ', 'リ', 'ル', 'レ', 'ロ', 'ワ', 'ン', '゛', '゜', 'ヺ', 'ヴ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド', 'バ', 'パ', 'ビ', 'ピ', 'ブ', 'プ', 'ベ', 'ペ', 'ボ', 'ポ', 'ヷ'] }
+};
 
 /***/ }),
-/* 9 */,
-/* 10 */,
-/* 11 */
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * @param {Object} mObj
+ * @return {Object}
+ */
+function types(mObj) {
+    var o = {};
+    o.range = mObj.start && mObj.end ? true : false;
+    o.regexpList = mObj.regexp && mObj.list ? true : false;
+    o.patterns = mObj.patterns ? true : false;
+    return o;
+}
+
+/**
+ * @type {Mojisyu}
+ */
+module.exports =
+/**
+ * @param {String} name
+ * @param {Object} mObj
+ */
+function Mojisyu(name, mObj) {
+    _classCallCheck(this, Mojisyu);
+
+    this.name = name;
+    this.types = types(mObj);
+    this.props = {};
+
+    _extends(this.props, mObj);
+};
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1643,7 +1634,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 12 */
+/* 9 */
 /***/ (function(module, exports) {
 
 if (typeof Object.create === 'function') {
@@ -1672,7 +1663,7 @@ if (typeof Object.create === 'function') {
 
 
 /***/ }),
-/* 13 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = function isBuffer(arg) {
@@ -1683,7 +1674,7 @@ module.exports = function isBuffer(arg) {
 }
 
 /***/ }),
-/* 14 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -2211,7 +2202,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __webpack_require__(13);
+exports.isBuffer = __webpack_require__(10);
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -2255,7 +2246,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = __webpack_require__(12);
+exports.inherits = __webpack_require__(9);
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -2273,20 +2264,10 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(8)))
 
 /***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(5);
-__webpack_require__(6);
-__webpack_require__(7);
-module.exports = __webpack_require__(8);
-
-
-/***/ }),
-/* 16 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -2311,6 +2292,15 @@ module.exports = function(module) {
 	}
 	return module;
 };
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+__webpack_require__(4);
+module.exports = __webpack_require__(5);
 
 
 /***/ })
