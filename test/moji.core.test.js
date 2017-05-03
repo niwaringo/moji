@@ -133,31 +133,31 @@ describe("moji.cores", () => {
             "あいう");
     });
 
-    it('filter regexp', function () {
+    it("filter regexp", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").filter("ZK").toString(),
             "アイウ");
     });
 
-    it('filter pattern', function () {
+    it("filter pattern", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").filter("ZS").toString(),
             "　");
     });
 
-    it('reject range', function () {
+    it("reject range", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").reject('HG').toString(),
             "ＡＢＣＤ　０１２３４アイウABCD 01234ｱｲｳ");
     });
 
-    it('reject regexp', function () {
+    it("reject regexp", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").reject("ZK").toString(),
             "ＡＢＣＤ　０１２３４あいうABCD 01234ｱｲｳ");
     });
 
-    it('filter pattern', function () {
+    it("filter pattern", () => {
         assert.strictEqual(
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").reject("ZS").toString(),
             "ＡＢＣＤ０１２３４あいうアイウABCD 01234ｱｲｳ");
