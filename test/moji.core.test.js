@@ -162,4 +162,13 @@ describe("moji.cores", () => {
             moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").reject("ZS").toString(),
             "ＡＢＣＤ０１２３４あいうアイウABCD 01234ｱｲｳ");
     });
+
+    it("addMojisyu", () => {
+        const o = {
+            "ADD": {start:0xff01, end:0xff5e},
+        };
+        moji.addMojisyu(o);
+
+        assert.deepEqual(moji()._mojisyu.ADD.name, "ADD");
+    });
 });

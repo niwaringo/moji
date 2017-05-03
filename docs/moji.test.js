@@ -1160,19 +1160,29 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var Moji = __webpack_require__(2);
             var defaultMojisyu = __webpack_require__(1);
             var Mojisyu = __webpack_require__(3);
-
             var mojisyu = {};
-            Object.keys(defaultMojisyu).forEach(function (m) {
-                mojisyu[m] = new Mojisyu(m, defaultMojisyu[m]);
-            });
+
+            /**
+             * @param {string} str
+             * @return {Moji}
+             */
+            function moji(str) {
+                return new Moji(str, mojisyu);
+            }
+
+            moji.addMojisyu = function (obj) {
+                Object.keys(obj).forEach(function (m) {
+                    mojisyu[m] = new Mojisyu(m, obj[m]);
+                });
+            };
+
+            moji.addMojisyu(defaultMojisyu);
 
             /**
              * @param {String} str
              * @return {Moji}
              */
-            module.exports = function (str) {
-                return new Moji(str, mojisyu);
-            };
+            module.exports = moji;
 
             /***/
         }])
@@ -1320,6 +1330,15 @@ describe("moji.cores", function () {
 
     it("filter pattern", function () {
         assert.strictEqual(moji("ＡＢＣＤ　０１２３４あいうアイウABCD 01234ｱｲｳ").reject("ZS").toString(), "ＡＢＣＤ０１２３４あいうアイウABCD 01234ｱｲｳ");
+    });
+
+    it("addMojisyu", function () {
+        var o = {
+            "ADD": { start: 0xff01, end: 0xff5e }
+        };
+        moji.addMojisyu(o);
+
+        assert.deepEqual(moji()._mojisyu.ADD.name, "ADD");
     });
 });
 

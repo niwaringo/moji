@@ -545,19 +545,29 @@ function patternReject(str, rejectMojisyu) {
 var Moji = __webpack_require__(2);
 var defaultMojisyu = __webpack_require__(1);
 var Mojisyu = __webpack_require__(3);
-
 var mojisyu = {};
-Object.keys(defaultMojisyu).forEach(function (m) {
-    mojisyu[m] = new Mojisyu(m, defaultMojisyu[m]);
-});
+
+/**
+ * @param {string} str
+ * @return {Moji}
+ */
+function moji(str) {
+    return new Moji(str, mojisyu);
+}
+
+moji.addMojisyu = function (obj) {
+    Object.keys(obj).forEach(function (m) {
+        mojisyu[m] = new Mojisyu(m, obj[m]);
+    });
+};
+
+moji.addMojisyu(defaultMojisyu);
 
 /**
  * @param {String} str
  * @return {Moji}
  */
-module.exports = function (str) {
-    return new Moji(str, mojisyu);
-};
+module.exports = moji;
 
 /***/ })
 /******/ ]);
