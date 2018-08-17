@@ -39,7 +39,7 @@ const moji = require("moji");
 使い方
 ------
 
-###convert()
+### convert()
 
 `convert("変換種別)`
 
