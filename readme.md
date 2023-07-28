@@ -61,7 +61,7 @@ moji("ＡＢＣＤ０１２３４").convert("ZEtoHE").toString();
 moji("ABCD01234").convert("HEtoZE").toString();
 // => ＡＢＣＤ０１２３４
 
-/** 全角スペース => 全角スペース **/
+/** 全角スペース => 半角スペース **/
 moji("　").convert("ZStoHS").toString();
 // => " "
 
